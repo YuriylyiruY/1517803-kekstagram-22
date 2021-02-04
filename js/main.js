@@ -1,19 +1,25 @@
 //task 1
-const randomNum = function repeat(fromNum, toNum) {
+const randomNum = function (fromNum, toNum) {
+  if (isNaN(toNum) || isNaN(fromNum) || Array.isArray(toNum) || Array.isArray(fromNum)) throw new Error('Получилось))');
+
+  if (fromNum > toNum) {
+    let between = fromNum;
+    fromNum = toNum;
+    toNum = between;
+    return toNum, fromNum;
+
+  }
   try {
-    let rand = fromNum + (Math.random() * (toNum));
+    let rand = +(Math.random() * (toNum + 1 - fromNum) + fromNum);
+
     if (fromNum <= rand && toNum >= rand) {
       return Math.floor(rand).toString();
-    } else if (fromNum > toNum) {
-      let between = fromNum;
-      fromNum = toNum;
-      toNum = between;
-      return repeat(fromNum, toNum);
+
     } else if (fromNum == toNum) {
       return Math.floor(toNum).toString();
     }
   } catch (err) {
-    return (err);
+    console.log(err);
   }
 
 
@@ -28,13 +34,7 @@ randomNum(min, max);
 
 //task 2
 const strLenght = function (str, maxLenght) {
-
-  if (str.length > maxLenght) {
-    return false;
-  } else {
-    return true;
-  }
-
+  return str.length <= maxLenght;
 }
 let str;
 let maxLenght;
