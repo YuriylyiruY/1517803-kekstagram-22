@@ -37,5 +37,5 @@ const strLenght = function (str, maxLenght) {
 
 }
 let str;
-const MAX_LENGHT = 9;
+const MAX_LENGHT;
 strLenght(str, MAX_LENGHT);
