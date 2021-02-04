@@ -1,24 +1,38 @@
 //task 1
 const randomNum = function repeat(fromNum, toNum) {
-  let rand = Math.random() * (toNum);
-  if ((fromNum <= rand && toNum >= rand) && rand != 0) {
-    return (Math.floor(rand));
-  } else if (fromNum > toNum) {
-    return alert('неправильно введен диапазон');
-  } else if (fromNum > rand) {
-    repeat(fromNum, toNum);
+  try {
+    let rand = fromNum + (Math.random() * (toNum));
+    if (fromNum <= rand && toNum >= rand) {
+      return Math.floor(rand).toString();
+    } else if (fromNum > toNum) {
+      let between = fromNum;
+      fromNum = toNum;
+      toNum = between;
+      return repeat(fromNum, toNum);
+    } else if (fromNum == toNum) {
+      return Math.floor(toNum).toString();
+    }
+  } catch (err) {
+    return (err);
   }
+
+
 }
 let min;
 let max;
 randomNum(min, max);
 
+// function func(x) {
+//   alert(x);
+// }
+
 //task 2
 const strLenght = function (str, maxLenght) {
+
   if (str.length > maxLenght) {
-    return alert('a lot of words, try again');
+    return false;
   } else {
-    return str;
+    return true;
   }
 
 }
