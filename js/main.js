@@ -1,15 +1,16 @@
 //task 1
 const randomNum = function (fromNum, toNum) {
-  if (isNaN(toNum) || isNaN(fromNum) || Array.isArray(toNum) || Array.isArray(fromNum)) throw new Error('Получилось))');
 
-  if (fromNum > toNum) {
-    let between = fromNum;
-    fromNum = toNum;
-    toNum = between;
-    return toNum, fromNum;
 
-  }
   try {
+    if (isNaN(toNum) || isNaN(fromNum) || Array.isArray(toNum) || Array.isArray(fromNum) || fromNum < 0 || toNum < 0) throw new Error('error');
+
+
+    if (fromNum > toNum) {
+      let between = fromNum;
+      fromNum = toNum;
+      toNum = between;
+    }
     let rand = +(Math.random() * (toNum + 1 - fromNum) + fromNum);
 
     if (fromNum <= rand && toNum >= rand) {
@@ -18,24 +19,24 @@ const randomNum = function (fromNum, toNum) {
     } else if (fromNum == toNum) {
       return Math.floor(toNum).toString();
     }
+
   } catch (err) {
-    console.log(err);
+    return err;
   }
 
-
 }
-let min;
-let max;
+let min = 50;
+let max = 10;
 randomNum(min, max);
 
-// function func(x) {
-//   alert(x);
-// }
 
 //task 2
 const strLenght = function (str, maxLenght) {
-  return str.length <= maxLenght;
+  if (str.length <= maxLenght) {
+    return str;
+  }
+
 }
-let str;
-let maxLenght;
+let str = 'Hello';
+let maxLenght = 9;
 strLenght(str, maxLenght);
