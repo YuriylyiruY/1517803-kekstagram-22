@@ -1,84 +1,75 @@
-const randomNum = function (fromNum, toNum) {
+const getRandomBetween = function (fromNum, toNum) {
 
   if (isNaN(toNum) || isNaN(fromNum) || Array.isArray(toNum) || Array.isArray(fromNum) || fromNum < 0 || toNum < 0) {
     throw new Error('Передано неверное значение.');
   }
 
   if (fromNum > toNum) {
-    let between = fromNum;
-    fromNum = toNum;
-    toNum = between;
+    let max = fromNum;
+    let min = toNum;
+    let rand = (Math.random() * (max + 1 - min) + min);
+    return Math.floor(rand);
   }
-  let rand = +(Math.random() * (toNum + 1 - fromNum) + fromNum);
+  let rand = (Math.random() * (toNum + 1 - fromNum) + fromNum);
   return Math.floor(rand);
 
 }
 
 //task 2
-const strLength = function (str, maxLength) {
-  if (str.length <= maxLength) {
-    return str;
+const checkStringLength = function (STR, MAXLENGTH) {
+  if (STR.length <= MAXLENGTH) {
+    return true;
   }
 
 }
 
-//const comments = [];
-const ourComments = (i) => {
+const getMessageText = () => {
+  const MESSAGE = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'В целом всё неплохо. Но не всё.',
+    'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+    'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+    'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
+  ];
+  const randArray = getRandomBetween(0, MESSAGE.length - 1);
+  return (MESSAGE[randArray]);
+};
 
-  const comm = {
-    id: randomNum(15, 200),
-    avatar: `img/avatar-${randomNum(1, 6)}.jpg`,
-    message: mess(),
+const ourComments = (i) => {
+  'use strict';
+  const getComment = {
+    id: getRandomBetween(15, 200),
+    avatar: `img/avatar-${getRandomBetween(1, 6)}.jpg`,
+    message: getMessageText(),
     name: `user${i}`,
   }
 
-  return (Object.entries(comm)
+  return (Object.entries(getComment)
     .map(([key, value]) => key + ' — ' + value)
     .join(', '));
 }
 
 
+const STR = 'good';
+const MAXLENGTH = 9;
+checkStringLength(STR,MAXLENGTH);
+const MIN = 15;
+const MAX = 200;
 
-const mess = () => {
+const createPhotos = () => {
+  const Photos = [];
+  let ArrLength = 25;
+  for (let i = 1; i <= ArrLength; i++) {
 
-  let message = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'В целом всё неплохо. Но не всё.',
-    'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-    'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-    'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
-  ];
-  const randArray = randomNum(0, message.length - 1);
-  return (message[randArray]);
-};
-
-
-const twentyFivePhotos = [];
-let str = 'good';
-let maxLength = 9;
-const min = 15;
-const max = 200;
-strLength(str, maxLength);
-const createTwentyFivePhotos = () => {
-  if (twentyFivePhotos.length == 0) {
-    for (let i = 1; i <= 25; i++) {
-      twentyFivePhotos.push({
-        id: i,
-        url: `photos/${i}.jpg`,
-        description: `user${i} say ${str}`,
-        likes: randomNum(min, max),
-        comments: ourComments(i),
-      })
-    }
-
+    Photos.push({
+      id: i,
+      url: `photos/${i}.jpg`,
+      description: `user${i} say ${STR}`,
+      likes: getRandomBetween(MIN, MAX),
+      comments: ourComments(i),
+    })
+  }
+  for (let j = 0; j < ArrLength; j++) {
+    return (Photos[j]);
   }
 }
-createTwentyFivePhotos();
 
-const useTwentyFivePhotos = () => {
-  for (let j = 0; j < 25; j++) {
-    return (twentyFivePhotos[j]);
-  }
-}
-useTwentyFivePhotos();
-
-// twentyFivePhotos.forEach((wizard) => console.log(`${wizard.id},
-// ${wizard.url}, ${wizard.description},${wizard.likes},${wizard.comments}`));
+createPhotos();
