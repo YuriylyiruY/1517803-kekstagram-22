@@ -7,7 +7,6 @@ const STR = 'good';
 const MAXLENGTH = 9;
 const MIN = 15;
 const MAX = 200;
-const ARRLENGTH = 25;
 const MESSAGE = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'В целом всё неплохо. Но не всё.',
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
@@ -49,12 +48,12 @@ const getOurComments = (i) => {
   }
 }
 
-const createPhotos = () => {
+const createPhotos = (ArrLength) => {
 
-  const PHOTOS = [];
-  for (let i = 1; i <= ARRLENGTH; i++) {
+  const Photos = [];
+  for (let i = 1; i <= ArrLength; i++) {
 
-    PHOTOS.push({
+    Photos.push({
       id: i,
       url: `photos/${i}.jpg`,
       description: `user${i} say ${STR}`,
@@ -63,8 +62,8 @@ const createPhotos = () => {
     })
   }
 
-  return PHOTOS;
+  return Photos;
 }
 
 checkStringLength(STR, MAXLENGTH);
-createPhotos();
+createPhotos(25);
