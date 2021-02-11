@@ -7,7 +7,7 @@ const STR = 'good';
 const MAXLENGTH = 9;
 const MIN = 15;
 const MAX = 200;
-const PHOTOS = [];
+
 const ARRLENGTH = 25;
 const getRandomBetween = function (fromNum, toNum) {
 
@@ -55,7 +55,7 @@ const getOurComments = (i) => {
 checkStringLength(STR, MAXLENGTH);
 const createPhotos = () => {
 
-
+  const PHOTOS = [];
   for (let i = 1; i <= ARRLENGTH; i++) {
 
     PHOTOS.push({
@@ -66,8 +66,8 @@ const createPhotos = () => {
       comments: getOurComments(i),
     })
   }
-  let allPhotos = PHOTOS;
-  return allPhotos;
+
+  return PHOTOS;
 }
 
 createPhotos();
