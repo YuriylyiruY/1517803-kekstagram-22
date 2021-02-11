@@ -15,11 +15,9 @@ const getRandomBetween = function (fromNum, toNum) {
 
 //task 2
 const checkStringLength = function (STR, MAXLENGTH) {
-  if (STR.length <= MAXLENGTH) {
-    return true;
-  }
-
+  return (STR.length <= MAXLENGTH) ? true : false;
 }
+
 const MESSAGE = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'В целом всё неплохо. Но не всё.',
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
