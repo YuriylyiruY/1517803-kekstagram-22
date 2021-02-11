@@ -12,7 +12,7 @@ const MESSAGE = ['Всё отлично!', 'В целом всё неплохо.
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
-const DATE_PHOTOS = createPhotos();
+const DATE_PHOTOS = createPhotos(25);
 
 const getRandomBetween = function (fromNum, toNum) {
 
@@ -67,6 +67,7 @@ const createPhotos = (ArrLength) => {
 }
 
 checkStringLength(STR, MAXLENGTH);
-createPhotos(25);
 
-
+/* eslint-disable no-console*/
+console.log (DATE_PHOTOS);
+/* eslint-anable no-console*/
