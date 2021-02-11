@@ -1,4 +1,14 @@
 'use strict';
+const START_NUM_ID = 15;
+const END_NUM_ID = 200;
+const START_NUM_AVATAR = 1;
+const END_NUM_AVATAR = 6;
+const STR = 'good';
+const MAXLENGTH = 9;
+const MIN = 15;
+const MAX = 200;
+const PHOTOS = [];
+const ARRLENGTH = 25;
 const getRandomBetween = function (fromNum, toNum) {
 
   if (isNaN(toNum) || isNaN(fromNum) || Array.isArray(toNum) || Array.isArray(fromNum) || fromNum < 0 || toNum < 0) {
@@ -15,7 +25,7 @@ const getRandomBetween = function (fromNum, toNum) {
 
 //task 2
 const checkStringLength = function (STR, MAXLENGTH) {
-  return (STR.length <= MAXLENGTH) ? true : false;
+  return (STR.length <= MAXLENGTH);
 }
 
 const MESSAGE = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'В целом всё неплохо. Но не всё.',
@@ -31,10 +41,7 @@ const getMessageText = () => {
 
 const getOurComments = (i) => {
 
-  const START_NUM_ID = 15;
-  const END_NUM_ID = 200;
-  const START_NUM_AVATAR = 1;
-  const END_NUM_AVATAR = 6;
+
   const COMMENT = {
     id: getRandomBetween(START_NUM_ID, END_NUM_ID),
     avatar: `img/avatar-${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}.jpg`,
@@ -44,16 +51,12 @@ const getOurComments = (i) => {
   return COMMENT;
 
 }
-const STR = 'good';
-const MAXLENGTH = 9;
-const MIN = 15;
-const MAX = 200;
-const PHOTOS = [];
+
 checkStringLength(STR, MAXLENGTH);
 const createPhotos = () => {
 
-  let ArrLength = 25;
-  for (let i = 1; i <= ArrLength; i++) {
+
+  for (let i = 1; i <= ARRLENGTH; i++) {
 
     PHOTOS.push({
       id: i,
