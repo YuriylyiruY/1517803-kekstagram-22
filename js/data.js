@@ -29,9 +29,9 @@ const createPhotos = (ArrLength) => {
 
   return Photos;
 }
-const DATE_PHOTOS = createPhotos(25);
+let DatePhotos = createPhotos(25);
 checkStringLength(STR, MAXLENGTH);
 
 export {
-  DATE_PHOTOS
+  DatePhotos
 };

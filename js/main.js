@@ -1,5 +1,5 @@
-import {DATE_PHOTOS} from './data.js';
+import {DatePhotos} from './data.js';
 
 /* eslint-disable no-console */
-console.log (DATE_PHOTOS);
+console.log (DatePhotos);
 /* eslint-enable no-console */
