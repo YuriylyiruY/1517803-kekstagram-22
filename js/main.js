@@ -1,38 +1,73 @@
-//task 1
-const randomNum = function (fromNum, toNum) {
+'use strict';
+const START_NUM_ID = 15;
+const END_NUM_ID = 200;
+const START_NUM_AVATAR = 1;
+const END_NUM_AVATAR = 6;
+const STR = 'good';
+const MAXLENGTH = 9;
+const MIN = 15;
+const MAX = 200;
+const MESSAGE = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'В целом всё неплохо. Но не всё.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
+];
+const DATE_PHOTOS = createPhotos(25);
+
+const getRandomBetween = function (fromNum, toNum) {
 
   if (isNaN(toNum) || isNaN(fromNum) || Array.isArray(toNum) || Array.isArray(fromNum) || fromNum < 0 || toNum < 0) {
     throw new Error('Передано неверное значение.');
   }
 
+  let max = fromNum;
+  let min = toNum;
   if (fromNum > toNum) {
-    let between = fromNum;
-    fromNum = toNum;
-    toNum = between;
+    [min, max] = [max, min];
   }
-  let rand = +(Math.random() * (toNum + 1 - fromNum) + fromNum);
-
-  if (fromNum <= rand && toNum >= rand) {
-    return Math.floor(rand);
-
-  } else if (fromNum == toNum) {
-    return Math.floor(toNum);
-  }
-
-
-
+  return Math.floor((Math.random() * (max + 1 - min) + min));
 }
-let min = 10;
-let max = 20;
-randomNum(min, max);
 
 //task 2
-const strLenght = function (str, maxLenght) {
-  if (str.length <= maxLenght) {
-    return str;
+const checkStringLength = function (STR, MAXLENGTH) {
+  return (STR.length <= MAXLENGTH);
+}
+
+
+const getMessageText = () => {
+
+  const randArray = getRandomBetween(0, MESSAGE.length - 1);
+  return (MESSAGE[randArray]);
+};
+
+const getOurComments = (i) => {
+  return {
+    id: getRandomBetween(START_NUM_ID, END_NUM_ID),
+    avatar: `img/avatar-${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}.jpg`,
+    message: getMessageText(),
+    name: `user${i}`,
+  }
+}
+
+const createPhotos = (ArrLength) => {
+
+  let Photos = [];
+  for (let i = 1; i <= ArrLength; i++) {
+
+    Photos.push({
+      id: i,
+      url: `photos/${i}.jpg`,
+      description: `user${i} say ${STR}`,
+      likes: getRandomBetween(MIN, MAX),
+      comments: getOurComments(i),
+    })
   }
 
+  return Photos;
 }
-let str = 'Hello';
-let maxLenght = 9;
-strLenght(str, maxLenght);
+
+checkStringLength(STR, MAXLENGTH);
+
+/* eslint-disable no-console*/
+console.log (DATE_PHOTOS);
+/* eslint-anable no-console*/
