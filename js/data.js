@@ -4,12 +4,8 @@ const MIN = 15;
 const MAX = 200;
 
 import {
-  getRandomBetween
-} from './util.js';
-import {
-  checkStringLength
-} from './util.js';
-import {
+  getRandomBetween,
+  checkStringLength,
   getOurComments
 } from './util.js';
 
