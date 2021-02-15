@@ -1,30 +1,24 @@
-import {
-  DATEPHOTOS
-}
-from './data.js';
+import {DATEPHOTOS} from './data.js';
+
 const pool = document.querySelector('.pictures');
 
 const templateFragment = document.querySelector('#picture').content; // Находим фрагмент с содержимым темплейта
-const likes = templateFragment.querySelector('.picture__likes'); // В фрагменте находим нужный элемент
-const fragment = document.createDocumentFragment(); // Создаём "коробочку"
-const comment = templateFragment.querySelector('.picture__comments'); // В фрагменте находим нужный элемент
-const fragment1 = document.createDocumentFragment(); // Создаём "коробочку"
-for (let i = 0; i < DATEPHOTOS.length-1; i++) {
-  const elementLikes = likes.cloneNode(true); // Клонируем элемент со всеми "внутренностями"
+const template = templateFragment.querySelector('a');
+const fragmentBox = document.createDocumentFragment(); // Создаём "коробочку"
+const getUrlFunk = (i) => DATEPHOTOS[i].url;
+const getCommentsFunk = (i) => DATEPHOTOS[i].comments;
+const getLikesFunk = (i) => DATEPHOTOS[i].likes;
 
-  const elementComments = comment.cloneNode(true);// Клонируем элемент со всеми "внутренностями"
-  //elementLikes.innerHTML = i;
-  //newElement.classList.add('el');
-  //elementComments.textContent = i;
-  fragment.appendChild(elementLikes);
-  fragment1.appendChild(elementComments);
-
+for (let i = 0; i < DATEPHOTOS.length; i++) {
+  const element = template.cloneNode(true); // Клонируем элемент со всеми "внутренностями"
+  element.innerHTML = `<img src="${getUrlFunk(i)}" width="182" height="182"><p class="picture__info"><span class="picture__comments">${getCommentsFunk(i)}</span><span class="picture__likes">${getLikesFunk(i)}</span></p>`;
+  fragmentBox.appendChild(element);
 }
+pool.appendChild(fragmentBox);
 
-pool.appendChild(fragment);
-pool.appendChild(fragment1);
 
-let b = console.log(pool.children);
-export{b};
-// parentDiv.appendChild(fragment);
-// console.log(parentDiv.children);
+
+let portToMain = pool.children;
+export {
+  portToMain
+};

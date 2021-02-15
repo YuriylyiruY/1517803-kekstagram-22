@@ -1,11 +1,4 @@
-import {DATEPHOTOS} from './data.js';
-
+import {portToMain} from './picture.js';
 /* eslint-disable no-console */
-//console.log (DATEPHOTOS);
-/* eslint-enable no-console */
-
-
-import {b} from './picture.js';
-/* eslint-disable no-console */
-console.log (b);
+console.log (portToMain);
 /* eslint-enable no-console */

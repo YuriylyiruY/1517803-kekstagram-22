@@ -38,10 +38,11 @@ const createPhotos = (arrLength) => {
 
     photos.push({
       id: i,
-      url: `photos/${i}.jpg`,
+      url: 'photos/'+i+'.jpg',
       description: `user${i} say ${STR}`,
       likes: getRandomBetween(MIN, MAX),
-      comments: getOurComments(i),
+      comments:getRandomBetween(START_NUM_ID, END_NUM_ID),
+      commentsFunc: getOurComments(i),
     })
   }
 
