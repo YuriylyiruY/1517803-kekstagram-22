@@ -11,13 +11,15 @@ const getRandomBetween = function (fromNum, toNum) {
   }
   return Math.floor((Math.random() * (max + 1 - min) + min));
 }
-export {
-  getRandomBetween
-};
+
 //task 2
 const checkStringLength = function (STR, MAXLENGTH) {
   return (STR.length <= MAXLENGTH);
 }
+
+export {
+  getRandomBetween
+};
 export {
   checkStringLength
 };
