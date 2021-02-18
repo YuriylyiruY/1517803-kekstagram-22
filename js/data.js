@@ -1,4 +1,6 @@
-import {getRandomBetween} from './util.js';
+import {
+  getRandomBetween
+} from './util.js';
 
 const MIN = 15;
 const MAX = 200;
@@ -23,27 +25,31 @@ export {
   messageText
 };
 
-const getComments = (i) => {
-  let comments = [];
-  comments.push({
-    id: getRandomBetween(START_NUM_ID, END_NUM_ID),
-    avatar: `img/avatar-${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}.svg`,
-    message: messageText,
-    name: `user${i}`,
-  })
+const getComments = (arrLength) => {
 
+  let comments = [];
+  for (let i = 1; i <= arrLength; i++) {
+    comments.push({
+      id: i,
+      avatar: `img/avatar-${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}.svg`,
+      message: messageText,
+      name: `user${i}`,
+    })
+  }
+  return comments;
 }
+const COMMENTS = getComments(25);
 export {
-  getComments
+  COMMENTS
 };
-getComments();
+
 const createPhotos = (arrLength) => {
 
   let photos = [];
-  for (let i = 1; i <= arrLength; i++) {
+  for (let i = 0; i <= arrLength; i++) {
 
     photos.push({
-      url: i,
+      //url:i,
       picture__likes: getRandomBetween(MIN, MAX),
       picture__comment: getRandomBetween(START_NUM_ID, END_NUM_ID),
     })
@@ -52,6 +58,7 @@ const createPhotos = (arrLength) => {
   return photos;
 }
 const DATEPHOTOS = createPhotos(25);
+
 
 export {
   DATEPHOTOS

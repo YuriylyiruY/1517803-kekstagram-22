@@ -7,22 +7,24 @@ const pool = document.querySelector('.pictures');
 const templateFragment = document.querySelector('#picture').content; // Находим фрагмент с содержимым темплейта
 const template = templateFragment.querySelector('a');
 const fragmentBox = document.createDocumentFragment(); // Создаём "коробочку"
-function getFetch() {
-  const getUrlFunc = (i) => DATEPHOTOS[i].url;
-  const getCommentsFunc = (i) => DATEPHOTOS[i].picture__comment;
-  const getLikesFunc = (i) => DATEPHOTOS[i].picture__likes;
 
-  for (let i = 0; i < DATEPHOTOS.length; i++) {
+function getFetch() {
+
+  for (let i = 1; i < DATEPHOTOS.length; i++) {
     const element = template.cloneNode(true); // Клонируем элемент со всеми "внутренностями"
-    element.innerHTML = `<img src="photos/${getUrlFunc(i)}.jpg" width="182" height="182"><p class="picture__info"><span class="picture__comments">${getCommentsFunc(i)}</span><span class="picture__likes">${getLikesFunc(i)}</span></p>`;
+    element.classList.add('el-' + (i + 1));
+    const temp = element.children;
+    temp[0].setAttribute('src', `photos/${i}.jpg`);
+    temp[1].children[0].textContent = DATEPHOTOS[i].picture__comment;
+    temp[1].children[1].textContent = DATEPHOTOS[i].picture__likes;
     fragmentBox.appendChild(element);
   }
   pool.appendChild(fragmentBox);
 }
-
 getFetch();
 
 let portToMain = pool.children;
+
 export {
   portToMain
 };
