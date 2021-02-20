@@ -1,21 +1,4 @@
-import {
-  portToMain
-} from './picture.js';
+import {picPhoto} from './fullpic.js';
 /* eslint-disable no-console */
-console.log(portToMain);
+console.log(picPhoto);
 /* eslint-enable no-console */
-
-
-// import {
-//   userBigPhoto
-// } from './big_picture.js';
-// /* eslint-disable no-console */
-// console.log(userBigPhoto);
-// /* eslint-enable no-console */
-
-// import {
-//   portBigPhotoToMain
-// } from './big_picture.js';
-// /* eslint-disable no-console */
-// console.log(portBigPhotoToMain);
-// /* eslint-enable no-console */

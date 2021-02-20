@@ -49,16 +49,14 @@ const createPhotos = (arrLength) => {
   for (let i = 0; i <= arrLength; i++) {
 
     photos.push({
-      //url:i,
-      picture__likes: getRandomBetween(MIN, MAX),
-      picture__comment: getRandomBetween(START_NUM_ID, END_NUM_ID),
+      picture__comment: getRandomBetween(MIN, MAX),
+      picture__likes: getRandomBetween(START_NUM_ID, END_NUM_ID),
     })
   }
 
   return photos;
 }
 const DATEPHOTOS = createPhotos(25);
-
 
 export {
   DATEPHOTOS
