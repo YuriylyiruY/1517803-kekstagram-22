@@ -87,7 +87,7 @@ let addClickHandle = function (thumbnail, data, comment,user,text,avatar,avatarL
   thumbnail.addEventListener('click', function () {
     imgTemplLikes[0].textContent = data;
     imgTemplComment[0].textContent = comment;
-    templateDescraption.textContent =user;
+    templateDescraption.textContent = user;
     templateText.textContent = text;
     templateAvatar[0].src = avatar;
     templateAvatar[1].src = avatarLast;
