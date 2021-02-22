@@ -21,43 +21,42 @@ const getMessageText = () => {
   return MESSAGE[randArray];
 };
 let messageText = getMessageText();
-export {
-  messageText
-};
+
+//========================================
+const getComment = (id) => ({
+  id: id,
+  avatar: `img/avatar-${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}.svg`,
+  message: messageText,
+  name: `user${id}`,
+});
 
 const getComments = (arrLength) => {
-
-  let comments = [];
-  for (let i = 1; i <= arrLength; i++) {
-    comments.push({
-      id: i,
-      avatar: `img/avatar-${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}.svg`,
-      message: messageText,
-      name: `user${i}`,
-    })
+  const comments = [];
+  for (let i = 0; i <= arrLength; i++) {
+    comments.push(getComment(i));
   }
   return comments;
 }
 const COMMENTS = getComments(25);
-export {
-  COMMENTS
-};
 
-const createPhotos = (arrLength) => {
+//======================================
+const createPhoto = (id) => ({
+  url: `photos/${id}.jpg`,
+  comment: getRandomBetween(MIN, MAX),
+  like: getRandomBetween(START_NUM_ID, END_NUM_ID),
+});
 
-  let photos = [];
+const getPhoto = (arrLength) => {
+  const photos = [];
   for (let i = 0; i <= arrLength; i++) {
-
-    photos.push({
-      picture__comment: getRandomBetween(MIN, MAX),
-      picture__likes: getRandomBetween(START_NUM_ID, END_NUM_ID),
-    })
+    photos.push(createPhoto(i));
   }
-
   return photos;
 }
-const DATEPHOTOS = createPhotos(25);
+const DATEPHOTOS = getPhoto(25);
+
 
 export {
+  COMMENTS,
   DATEPHOTOS
 };

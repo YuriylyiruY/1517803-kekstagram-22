@@ -95,7 +95,7 @@ let addClickHandle = function (thumbnail, data, comment,user,text,avatar,avatarL
 };
 
 for (let j = 1; j <= DATEPHOTOS.length; j++) {
-  addClickHandle(picPhotos[j - 1],DATEPHOTOS[j].picture__likes,DATEPHOTOS[j].picture__comment,
+  addClickHandle(picPhotos[j - 1],DATEPHOTOS[j].like,DATEPHOTOS[j].comment,
     `Круто ${getRandomBetween(1, DATEPHOTOS.length)} баллов`,MESSAGE[`${getRandomBetween(1, MESSAGE.length)}`], COMMENTS[`${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}`].avatar,COMMENTS[`${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}`].avatar);
 }
 
