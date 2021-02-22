@@ -1,4 +1,4 @@
-import {picPhoto} from './fullpic.js';
+import {picPhotos} from './fullpic.js';
 /* eslint-disable no-console */
-console.log(picPhoto);
+console.log(picPhotos);
 /* eslint-enable no-console */
