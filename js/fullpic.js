@@ -1,23 +1,21 @@
 import {
-  portToMain
+  portToMain,
+  PICTURES
 } from './picture.js';
 import {
-  DATEPHOTOS,
-  COMMENTS
+  COMMENTS,
+  getMessageText,
+  getName
+  //getPhoto
 } from './data.js';
 import {
   getRandomBetween
 } from './util.js';
-
 const START_NUM_AVATAR = 1;
 const END_NUM_AVATAR = 6;
-const MESSAGES = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'В целом всё неплохо. Но не всё.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают.', 'Как можно было поймать такой неудачный момент?!',
-];
-const NAMES =['Тор','Зевс','Локи','Один','Пасейдон','Аид'];
-const getUser = getRandomBetween(1, DATEPHOTOS.length);
+
+
+const getUser = getRandomBetween(1, PICTURES.length);
 
 //создаю класс
 const template = document.querySelector('.big-picture__img');
@@ -83,7 +81,7 @@ const templateText = document.querySelector('.social__text');
 const templateDescraption = document.querySelector('.social__caption');
 
 //кликер переход данных от маленькой к большой картинке
-let onAddClick = function (thumbnail, data, comment,user,text,avatar,avatarLast) {
+let onAddClick = function (thumbnail, data, comment, user, text, avatar, avatarLast) {
   thumbnail.addEventListener('click', function () {
     imgTemplLikes[0].textContent = data;
     imgTemplComment[0].textContent = comment;
@@ -94,9 +92,9 @@ let onAddClick = function (thumbnail, data, comment,user,text,avatar,avatarLast)
   });
 };
 
-for (let j = 1; j <= DATEPHOTOS.length; j++) {
-  onAddClick(picPhotos[j - 1],DATEPHOTOS[j].like,DATEPHOTOS[j].comment,
-    `${NAMES[`${getRandomBetween(1, NAMES.length)}`]} сказал круто ${getRandomBetween(1, DATEPHOTOS.length)} баллов`,MESSAGES[`${getRandomBetween(1, MESSAGES.length)}`], COMMENTS[`${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}`].avatar,COMMENTS[`${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}`].avatar);
+for (let j = 1; j <= PICTURES.length; j++) {
+  onAddClick(picPhotos[j - 1], PICTURES[j - 1].like, PICTURES[j - 1].comment,
+    getName(), getMessageText(), COMMENTS[`${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}`].avatar, COMMENTS[`${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}`].avatar);
 }
 
 //выключатель modale-open

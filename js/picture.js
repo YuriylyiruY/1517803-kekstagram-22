@@ -1,10 +1,11 @@
 import {
-  DATEPHOTOS
+  getPhoto
 } from './data.js';
+
 
 const PICTURES_NODE = document.querySelector('.pictures');
 const PICTURE_COUNT = 25;
-
+let PICTURES = getPhoto(PICTURE_COUNT);
 const templateFragment = document.querySelector('#picture'); // Находим фрагмент с содержимым темплейта
 
 
@@ -16,28 +17,27 @@ const renderPicture = (data) => {
   const comments = element.querySelector('.picture__comments');
   const likes = element.querySelector('.picture__likes');
 
-  img.setAttribute('src',DATEPHOTOS[data].url);
-  comments.textContent = DATEPHOTOS[data].comment;
-  likes.textContent = DATEPHOTOS[data].like;
+  img.setAttribute('src', data.url);
+  comments.textContent = data.comment;
+  likes.textContent = data.like;
 
   return element;
 };
-
-const renderPictures = () => {
+const renderPictures = (pictures) => {
   const fragmentBox = document.createDocumentFragment(); // Создаём "коробочку"
-
-  for (let i = 1; i <= PICTURE_COUNT; i++) {
-    const element = renderPicture(i);
-    fragmentBox.appendChild(element);
-  }
+  pictures.forEach(element => {
+    const picture = renderPicture(element);
+    fragmentBox.appendChild(picture);
+  });
   return fragmentBox;
 }
-
-const placePictures = () => {
-  PICTURES_NODE.appendChild(renderPictures());
+const placePictures = (pictures) => {
+  PICTURES_NODE.appendChild(renderPictures(pictures));
 }
-placePictures();
+placePictures(PICTURES);
 const portToMain = PICTURES_NODE.children;
 export {
-  portToMain
+  portToMain,PICTURES
 };
+
+

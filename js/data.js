@@ -13,7 +13,8 @@ const MESSAGE = ['Всё отлично!', 'В целом всё неплохо.
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают.', 'Как можно было поймать такой неудачный момент?!',
 ];
-
+const NAMES =['Тор','Зевс','Локи','Один','Пасейдон','Аид'];
+//========================================
 const getMessageText = () => {
 
   const randArray = getRandomBetween(0, MESSAGE.length);
@@ -23,6 +24,14 @@ const getMessageText = () => {
 let messageText = getMessageText();
 
 //========================================
+const getName = () => {
+
+  const randArray = getRandomBetween(0, NAMES.length);
+
+  return NAMES[randArray];
+};
+
+//=========================================
 const getComment = (id) => ({
   id: id,
   avatar: `img/avatar-${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}.svg`,
@@ -48,15 +57,15 @@ const createPhoto = (id) => ({
 
 const getPhoto = (arrLength) => {
   const photos = [];
-  for (let i = 0; i <= arrLength; i++) {
+  for (let i = 1; i <= arrLength; i++) {
     photos.push(createPhoto(i));
   }
   return photos;
 }
-const DATEPHOTOS = getPhoto(25);
+
 
 
 export {
   COMMENTS,
-  DATEPHOTOS
+  getPhoto,getMessageText,getName
 };
