@@ -13,15 +13,14 @@ const MESSAGE = ['Всё отлично!', 'В целом всё неплохо.
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают.', 'Как можно было поймать такой неудачный момент?!',
 ];
-const NAMES =['Тор','Зевс','Локи','Один','Пасейдон','Аид'];
+const NAMES = ['Тор', 'Зевс', 'Локи', 'Один', 'Пасейдон', 'Аид'];
 //========================================
-const getMessageText = () => {
 
-  const randArray = getRandomBetween(0, MESSAGE.length);
-
-  return MESSAGE[randArray];
-};
-let messageText = getMessageText();
+let callback = () => Math.floor(Math.random() * 3) - 1;
+const getMessageText = (MESSAGE) => {
+  return MESSAGE.sort(callback).slice(0, Math.floor(Math.random() * 2) + 1);
+}
+let messageText = getMessageText(MESSAGE);
 
 //========================================
 const getName = () => {
@@ -67,5 +66,7 @@ const getPhoto = (arrLength) => {
 
 export {
   COMMENTS,
-  getPhoto,getMessageText,getName
+  getPhoto,
+  getMessageText,
+  getName
 };

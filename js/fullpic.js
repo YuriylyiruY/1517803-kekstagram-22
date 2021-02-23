@@ -13,7 +13,11 @@ import {
 } from './util.js';
 const START_NUM_AVATAR = 1;
 const END_NUM_AVATAR = 6;
-
+const MESSAGE = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'В целом всё неплохо. Но не всё.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают.', 'Как можно было поймать такой неудачный момент?!',
+];
 
 const getUser = getRandomBetween(1, PICTURES.length);
 
@@ -94,7 +98,7 @@ let onAddClick = function (thumbnail, data, comment, user, text, avatar, avatarL
 
 for (let j = 1; j <= PICTURES.length; j++) {
   onAddClick(picPhotos[j - 1], PICTURES[j - 1].like, PICTURES[j - 1].comment,
-    getName(), getMessageText(), COMMENTS[`${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}`].avatar, COMMENTS[`${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}`].avatar);
+    getName(), getMessageText(MESSAGE), COMMENTS[`${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}`].avatar, COMMENTS[`${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}`].avatar);
 }
 
 //выключатель modale-open
