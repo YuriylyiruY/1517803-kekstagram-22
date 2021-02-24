@@ -1,5 +1,6 @@
 import {
-  getRandomBetween
+  getRandomBetween,
+  getRandomTextFromArr
 } from './util.js';
 
 const MIN = 15;
@@ -13,60 +14,31 @@ const MESSAGE = ['Всё отлично!', 'В целом всё неплохо.
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают.', 'Как можно было поймать такой неудачный момент?!',
 ];
-const NAMES = ['Тор', 'Зевс', 'Локи', 'Один', 'Пасейдон', 'Аид'];
 //========================================
 
-let callback = () => Math.floor(Math.random() * 3) - 1;
-const getMessageText = (MESSAGE) => {
-  return MESSAGE.sort(callback).slice(0, Math.floor(Math.random() * 2) + 1);
-}
-let messageText = getMessageText(MESSAGE);
-
-//========================================
-const getName = () => {
-
-  const randArray = getRandomBetween(0, NAMES.length);
-
-  return NAMES[randArray];
-};
-
-//=========================================
-const getComment = (id) => ({
-  id: id,
-  avatar: `img/avatar-${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}.svg`,
-  message: messageText,
-  name: `user${id}`,
-});
-
-const getComments = (arrLength) => {
-  const comments = [];
-  for (let i = 0; i <= arrLength; i++) {
-    comments.push(getComment(i));
-  }
-  return comments;
-}
-const COMMENTS = getComments(25);
+let message = MESSAGE;
+let messageText = getRandomTextFromArr(message);
 
 //======================================
 const createPhoto = (id) => ({
   url: `photos/${id}.jpg`,
   comment: getRandomBetween(MIN, MAX),
   like: getRandomBetween(START_NUM_ID, END_NUM_ID),
+  id: id,
+  avatar: `img/avatar-${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}.svg`,
+  message: messageText,
+  name: `user${id}`,
+
 });
 
-const getPhoto = (arrLength) => {
+const getPhotos = (count) => {
   const photos = [];
-  for (let i = 1; i <= arrLength; i++) {
+  for (let i = 1; i <= count; i++) {
     photos.push(createPhoto(i));
   }
   return photos;
 }
 
-
-
 export {
-  COMMENTS,
-  getPhoto,
-  getMessageText,
-  getName
+  getPhotos
 };

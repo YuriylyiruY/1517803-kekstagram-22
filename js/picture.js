@@ -1,13 +1,5 @@
-import {
-  getPhoto
-} from './data.js';
-
-
 const PICTURES_NODE = document.querySelector('.pictures');
-const PICTURE_COUNT = 25;
-let PICTURES = getPhoto(PICTURE_COUNT);
 const templateFragment = document.querySelector('#picture'); // Находим фрагмент с содержимым темплейта
-
 
 const renderPicture = (data) => {
 
@@ -34,10 +26,8 @@ const renderPictures = (pictures) => {
 const placePictures = (pictures) => {
   PICTURES_NODE.appendChild(renderPictures(pictures));
 }
-placePictures(PICTURES);
-const portToMain = PICTURES_NODE.children;
+
 export {
-  portToMain,PICTURES
+  renderPictures,
+  placePictures
 };
-
-
