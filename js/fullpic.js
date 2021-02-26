@@ -1,122 +1,104 @@
-// import {
-//   portToMain,
-//   PICTURES
-// } from './picture.js';
-// import {
 
-//   getRandomTextFromArr
+import {
+  getRandomBetween,
+  getRandomValue,
+  getRandomTextFromArr
+} from './util.js';
+import {
+  getPhotos
+} from './data.js';
+import {
+  placePictures
+} from './picture.js';
 
+const PICTURE_COUNT = 25;
+const PICTURES = getPhotos(PICTURE_COUNT);
+placePictures(PICTURES);
+const START_NUM_AVATAR = 1;
+const END_NUM_AVATAR = 6;
+const MESSAGE = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'В целом всё неплохо. Но не всё.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают.', 'Как можно было поймать такой неудачный момент?!',
+];
+const NAMES = ['Тор', 'Зевс', 'Локи', 'Один', 'Посейдон', 'Аид'];
 
-// } from './util.js';
-// import {
-//   getRandomBetween,getRandomValue
-// } from './util.js';
-// import{
-//   getPhotos
-// }from './main.js';
-// const START_NUM_AVATAR = 1;
-// const END_NUM_AVATAR = 6;
-// const MESSAGE = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'В целом всё неплохо. Но не всё.',
-//   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-//   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-//   'Лица у людей на фотке перекошены, как будто их избивают.', 'Как можно было поймать такой неудачный момент?!',
-// ];
-// const NAMES = ['Тор', 'Зевс', 'Локи', 'Один', 'Посейдон', 'Аид'];
-// const COMMENTS = getPhotos(25);
-// const getUser = getRandomBetween(1, PICTURES.length);
+//==========================================
+//массив фотографий
+const getPictures = (elements) => {
+  const arrPhotos = [];
+  for (let i = 0; i <= elements; i++) {
+    arrPhotos.push(`photos/${i}.jpg`);
+  }
+  return arrPhotos;
+}
 
-// //создаю класс
-// const template = document.querySelector('.big-picture__img');
-// const imgTempl = template.children;
-// imgTempl[0].classList.add('pic');
-
-// //массив фотографий
-// const getPictures = (elements) => {
-//   const arrPhotos = [];
-//   for (let i = 2; i <= elements; i++) {
-//     arrPhotos.push(portToMain[i].children[0].src);
-//   }
-//   return arrPhotos;
-// }
-// let massPhotos = getPictures(26);
-
-// let picPhoto = document.querySelector('.pictures');
-// let fullPhotos = document.querySelector('.big-picture');
-// let fullPhotosExit = document.querySelector('.big-picture__cancel');
-
-// let picPhotos = document.querySelectorAll('.picture');
-// let fullPhoto = document.querySelector('.pic');
-
-// //выключатель
-// picPhoto.addEventListener('click', () => {
-//   fullPhotos.classList.remove('hidden');
-// });
-
-// fullPhotosExit.addEventListener('click', () => {
-//   fullPhotos.classList.add('hidden');
-// });
-
-// let onAddClickHandler = function (thumbnail, photo) {
-//   thumbnail.addEventListener('click', function () {
-//     fullPhoto.src = photo;
-//   });
-// };
-// for (let i = 0; i < massPhotos.length; i++) {
-//   onAddClickHandler(picPhotos[i], massPhotos[i]);
-// }
-
-// //коментарии
-// const templateComment = document.querySelector('.social__comment-count');
-// const imgTemplComment = templateComment.children;
-
-// //лайки
-// const templateLikes = document.querySelector('.social__likes');
-// const imgTemplLikes = templateLikes.children;
+//=============================================
+const PHOTOS = document.querySelector('.pictures');
+//==========================================
+//выключатель
+const BIGPICTURE = document.querySelector('.big-picture');
+PHOTOS.addEventListener('click', () => {
+  BIGPICTURE.classList.remove('hidden');
+});
+const bigPictureCancel = document.querySelector('.big-picture__cancel');
+bigPictureCancel.addEventListener('click', () => {
+  BIGPICTURE.classList.add('hidden');
+});
+//===========================================
+const massPhotos = getPictures(PICTURE_COUNT);
 
 
-// //аватар
-// const templateAvatar = document.querySelectorAll('.social__picture');
+const PIC = document.querySelectorAll('.picture');
+const PICTURES_IMG = document.querySelector('.big-picture__img img');
+
+const onAddClickHandler = function (thumbnail, photo) {
+  thumbnail.addEventListener('click', function () {
+
+    PICTURES_IMG.setAttribute('src', photo);
+  });
+};
+for (let i = 1; i < PICTURE_COUNT + 1; i++) {
+  onAddClickHandler(PIC[i - 1], massPhotos[i]);
+}
+
+//==============================================
+
+//кликер переход данных от маленькой к большой картинке
+
+let onAddClick = function (thumbnail, data, comment, user, text, avatar, lastAvatar) {
+  thumbnail.addEventListener('click', function () {
+    const IMG_TEMPLATE_COMMENT = document.querySelector('.social__comment-count .comments-count');
+    const IMG_TEMPLATE_LIKE = document.querySelector('.social__likes .likes-count');
+    const TEMPLATE_TEXT = document.querySelector('.social__text');
+    const TEMPLATE_DESCRAPTION = document.querySelector('.social__caption');
+    const TEMPLATE_AVATAR = document.querySelectorAll('.social__picture');
+    IMG_TEMPLATE_LIKE.textContent = data;
+    IMG_TEMPLATE_COMMENT.textContent = comment;
+    TEMPLATE_DESCRAPTION.textContent = user;
+    TEMPLATE_TEXT.textContent = text;
+    TEMPLATE_AVATAR[0].setAttribute('src', avatar);
+    TEMPLATE_AVATAR[1].setAttribute('src', lastAvatar);
+  });
+};
+
+for (let j = 1; j <= PICTURE_COUNT; j++) {
+  onAddClick(PIC[j - 1], PICTURES[j - 1].like, PICTURES[j - 1].comment, getRandomValue(NAMES), getRandomTextFromArr(MESSAGE), PICTURES[`${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}`].avatar, PICTURES[`${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}`].avatar)
+}
 
 
-// //Имя коментатора
-// const templateComentator = document.querySelector('.social__picture');
-// templateComentator.textContent = COMMENTS[`${getUser}`].name;
+//выключатель modale-open
+//==================================================
+const MODAL_OPEN = document.querySelector('body');
 
-// //текст коментария
-// const templateText = document.querySelector('.social__text');
+PIC.addEventListener('click', () => {
+  MODAL_OPEN.classList.add('modal-open');
+});
 
-// //описание фото
-// const templateDescraption = document.querySelector('.social__caption');
-
-// //кликер переход данных от маленькой к большой картинке
-// let onAddClick = function (thumbnail, data, comment, user, text, avatar, avatarLast) {
-//   thumbnail.addEventListener('click', function () {
-//     imgTemplLikes[0].textContent = data;
-//     imgTemplComment[0].textContent = comment;
-//     templateDescraption.textContent = user;
-//     templateText.textContent = text;
-//     templateAvatar[0].src = avatar;
-//     templateAvatar[1].src = avatarLast;
-//   });
-// };
-
-// for (let j = 1; j <= PICTURES.length; j++) {
-//   onAddClick(picPhotos[j - 1], PICTURES[j - 1].like, PICTURES[j - 1].comment,
-//     getRandomValue(NAMES), getRandomTextFromArr(MESSAGE), COMMENTS[`${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}`].avatar, COMMENTS[`${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}`].avatar);
-// }
-
-// //выключатель modale-open
-
-// let modalOpen = document.querySelector('body');
-
-// picPhoto.addEventListener('click', () => {
-//   modalOpen.classList.add('modal-open');
-// });
-
-// fullPhotosExit.addEventListener('click', () => {
-//   modalOpen.classList.remove('modal-open');
-// });
-// export {
-//   massPhotos,
-//   picPhotos,getPictures
-// };
+bigPictureCancel.addEventListener('click', () => {
+  MODAL_OPEN.classList.remove('modal-open');
+});
+export {
+  getPictures,
+  onAddClick
+};

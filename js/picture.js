@@ -1,9 +1,9 @@
 const PICTURES_NODE = document.querySelector('.pictures');
-const templateFragment = document.querySelector('#picture'); // Находим фрагмент с содержимым темплейта
+const TEMPLATEFRAGMENT = document.querySelector('#picture'); // Находим фрагмент с содержимым темплейта
 
 const renderPicture = (data) => {
 
-  const element = templateFragment.content.cloneNode(true); // Клонируем элемент со всеми "внутренностями"
+  const element = TEMPLATEFRAGMENT.content.cloneNode(true); // Клонируем элемент со всеми "внутренностями"
 
   const img = element.querySelector('.picture__img');
   const comments = element.querySelector('.picture__comments');
@@ -23,7 +23,12 @@ const renderPictures = (pictures) => {
   });
   return fragmentBox;
 }
+const removeChildren = (parent, selector) => {
+  const children = parent.querySelectorAll(selector);
+  children.forEach(child => parent.removeChild(child));
+}
 const placePictures = (pictures) => {
+  removeChildren(PICTURES_NODE, '.picture');
   PICTURES_NODE.appendChild(renderPictures(pictures));
 }
 

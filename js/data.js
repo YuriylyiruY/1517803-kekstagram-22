@@ -14,19 +14,14 @@ const MESSAGE = ['Всё отлично!', 'В целом всё неплохо.
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают.', 'Как можно было поймать такой неудачный момент?!',
 ];
-//========================================
 
-let message = MESSAGE;
-let messageText = getRandomTextFromArr(message);
-
-//======================================
 const createPhoto = (id) => ({
   url: `photos/${id}.jpg`,
   comment: getRandomBetween(MIN, MAX),
   like: getRandomBetween(START_NUM_ID, END_NUM_ID),
   id: id,
   avatar: `img/avatar-${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}.svg`,
-  message: messageText,
+  message:getRandomTextFromArr(MESSAGE).join(''),
   name: `user${id}`,
 
 });
