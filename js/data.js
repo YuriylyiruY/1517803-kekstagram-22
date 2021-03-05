@@ -17,12 +17,13 @@ const MESSAGE = ['Всё отлично!', 'В целом всё неплохо.
 
 const createPhoto = (id) => ({
   url: `photos/${id}.jpg`,
-  comment: getRandomBetween(MIN, MAX),
-  like: getRandomBetween(START_NUM_ID, END_NUM_ID),
+  comments_count: getRandomBetween(MIN, MAX),
+  likes_count: getRandomBetween(START_NUM_ID, END_NUM_ID),
   id: id,
   avatar: `img/avatar-${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}.svg`,
   message:getRandomTextFromArr(MESSAGE).join(''),
   name: `user${id}`,
+  descraption: `user${id} say it is a cool photo`,
 
 });
 
