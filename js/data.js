@@ -3,8 +3,8 @@ import {
   getRandomTextFromArr
 } from './util.js';
 
-const MIN = 15;
-const MAX = 200;
+const MIN_USERS = 1000;
+const MAX_USERS = 10000;
 const START_NUM_ID = 15;
 const END_NUM_ID = 200;
 const START_NUM_AVATAR = 1;
@@ -15,17 +15,53 @@ const MESSAGE = ['Всё отлично!', 'В целом всё неплохо.
   'Лица у людей на фотке перекошены, как будто их избивают.', 'Как можно было поймать такой неудачный момент?!',
 ];
 
-const createPhoto = (id) => ({
-  url: `photos/${id}.jpg`,
-  comments_count: getRandomBetween(MIN, MAX),
-  likes_count: getRandomBetween(START_NUM_ID, END_NUM_ID),
-  id: id,
-  avatar: `img/avatar-${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}.svg`,
-  message:getRandomTextFromArr(MESSAGE).join(''),
-  name: `user${id}`,
-  descraption: `user${id} say it is a cool photo`,
+/**
+ * создает содержимое одного коментария от одного пользователя
+ * @param {*} id - id пользователя указаное в параметрах MIN_USERS, MAX_USERS
+ * @returns
+ */
 
+const createComment = (id) => ({
+  id,
+  avatar: `img/avatar-${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}.svg`,
+  message: getRandomTextFromArr(MESSAGE).join(''),
+  name: `user${id}`,
 });
+
+/**
+ * упаковывает по одному комментарию в массив коментариев
+ * @param {*} count - количество коментов которые будут в массиве берется из main
+ * @returns
+ */
+
+const getComments = (count) => {
+  const comments = [];
+  for (let i = 1; i <= count; i++) {
+    comments.push(createComment(getRandomBetween(MIN_USERS, MAX_USERS)));
+  }
+  return comments;
+}
+
+/**
+ * создает содержимое для одного фото и вытаскивает из массива комментариев нужное число комментариев
+ * @param {*} id
+ * @returns
+ */
+
+const createPhoto = (id) => ({
+  id,
+  url: `photos/${id}.jpg`,
+  likes: getRandomBetween(START_NUM_ID, END_NUM_ID),
+  // description: `autor${id} say it is a cool photo`,
+  comments: getComments(getRandomBetween(2, 5)),
+  author: createComment(id),
+});
+
+/**
+ * создает массив  фотографий уже с содержимым
+ * @param {*} count
+ * @returns
+ */
 
 const getPhotos = (count) => {
   const photos = [];

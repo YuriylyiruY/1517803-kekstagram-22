@@ -1,33 +1,21 @@
 import {
   getPhotos
 } from './data.js';
-//=================================
+
 import {
-  renderPicturesComments,
-  renderPictures,
-  placePictures,
-  placePicturesComments
+  placePictures
 } from './picture.js';
-//================================
-import {
-  getClicker
-} from './bigPictures.js';
-//=======================
-import {
-  getRandomTextFromArr
-} from './util.js';
-//=======================
+
 const PICTURE_COUNT = 25;
-let PICTURES = getPhotos(PICTURE_COUNT);
-placePictures(PICTURES);
-// const COMMENTS_COUNT = 2;
-// const COMMENTS_COUNT_APPGRAIT=getRandomTextFromArr(COMMENTS_COUNT);
-// let COMMENTS = getPhotos(COMMENTS_COUNT_APPGRAIT);
-placePicturesComments(PICTURES);
+let DATA = getPhotos(PICTURE_COUNT);
+placePictures(DATA);
 
-
-const CONTAINER = document.querySelector('.pictures');
-CONTAINER.addEventListener('click', getClicker);
-
-
-export{PICTURES};
+/**
+ * Для задания 6
+ * 1. На input file повесить обработчик change
+ * 2. Ограничить для инпут файлов типы файлов (гогле), только картинки
+ * 3. В обработчике через evt.target.files[0] получить информацию о выбранном файле
+ * 4. С помощью FileReader и readAsDataURL  получить содержимое картинки из файла в пункте 3
+ * 5. Вставить содержимое картинки в атрибут src  соответствующего элемента формы
+ * 6. Показать форму
+ */

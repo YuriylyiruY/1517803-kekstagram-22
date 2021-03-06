@@ -1,53 +1,35 @@
-const PICTURES_NODE = document.querySelector('.pictures');
-const SOCIAL_COMMENTS = document.querySelector('.social__comments');
-const TEMPLATE_FRAGMENT = document.querySelector('#picture'); // Находим фрагмент с содержимым темплейта
-const TEMPLATE_COMMENTS = document.querySelector('#social__comment');
+import {
+  getClickHandler
+} from './bigPictures.js';
 
-const renderPictureComments = (data) => {
-  // element comments=========
-  const podElement = TEMPLATE_COMMENTS.content.cloneNode(true);
-  const imgAvatar = podElement.querySelector('.social__picture');
-  imgAvatar.setAttribute('src', data.avatar);
-  imgAvatar.setAttribute('alt', data.name);
-  const textAvatar = podElement.querySelector('.social__text');
-  textAvatar.textContent = data.message;
-  return podElement;
-};
+const PICTURES_NODE = document.querySelector('.pictures');
+const TEMPLATE_FRAGMENT = document.querySelector('#picture'); // Находим фрагмент с содержимым темплейта
+
+/**
+ * заполняется разметка маленькой картинки
+ * @param {*} data - массив объектов, со вложенными коментами
+ * @returns фрагмент .picture с значениями
+ */
 const renderPicture = (data) => {
 
   const element = TEMPLATE_FRAGMENT.content.cloneNode(true); // Клонируем элемент со всеми "внутренностями"
   const img = element.querySelector('.picture__img');
   const commentQuantity = element.querySelector('.picture__comments');
   const likes = element.querySelector('.picture__likes');
+
   img.setAttribute('src', data.url);
-  img.setAttribute('id', data.id);
-  likes.textContent = data.likes_count;
-  commentQuantity.textContent = data.comments_count;
+  img.setAttribute('data-id', data.id);
+  likes.textContent = data.likes;
+  commentQuantity.textContent = data.comments.length;
 
-
-  /*
-  <li class="social__comment">
-    <img
-        class="social__picture"
-        src="{{аватар}}"
-        alt="{{имя комментатора}}"
-        width="35" height="35">
-    <p class="social__text">{{текст комментария}}</p>
-</li> */
   return element;
 };
-const renderPicturesComments = (pictures) => {
-  const fragmentBoxComments = document.createDocumentFragment(); // Создаём "коробочку"
-  pictures.forEach(data => {
 
-    const comment = renderPictureComments(data);
-
-    fragmentBoxComments.appendChild(comment);
-  });
-
-  return fragmentBoxComments;
-}
-
+/**  Фрагменты которые приходят путем вызова функции renderPicture заполняются в коробочку
+ *
+ * @param {*} pictures
+ * @returns возращает набор фрагментов
+ */
 const renderPictures = (pictures) => {
   const fragmentBox = document.createDocumentFragment(); // Создаём "коробочку"
   pictures.forEach(data => {
@@ -55,23 +37,28 @@ const renderPictures = (pictures) => {
     fragmentBox.appendChild(picture);
   });
   return fragmentBox;
+
 }
+
 const removeChildren = (parent, selector) => {
   const children = parent.querySelectorAll(selector);
   children.forEach(child => parent.removeChild(child));
 }
-const placePicturesComments = (pictures) => {
-  removeChildren(SOCIAL_COMMENTS, '.social__comment');
-  SOCIAL_COMMENTS.appendChild(renderPicturesComments(pictures));
-}
+
+
+/** Удаляет прежнее содержание, картинки, лайки, коменты с помощью removeChildren
+ *  Коробочку вставляет в DOM более точно в .pictures
+ * Срабатывает при клике по картинке, где передает данные  (аналог data, DATA из майн ) по месту вызова
+ *
+ * @param {*} pictures массив объектов (аналог data, DATA из майн )
+ */
 const placePictures = (pictures) => {
   removeChildren(PICTURES_NODE, '.picture');
   PICTURES_NODE.appendChild(renderPictures(pictures));
+  PICTURES_NODE.addEventListener('click', getClickHandler(pictures));
 }
 
 export {
   renderPictures,
-  renderPicturesComments,
-  placePictures,
-  placePicturesComments
+  placePictures
 };
