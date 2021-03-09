@@ -8,12 +8,9 @@ const getRandomBetween = function (fromNum, toNum) {
   let min = toNum;
   if (fromNum > toNum) {
     [min, max] = [max, min];
-  }
-  if (Math.random() >= 0.5) {
-    return (Math.ceil((Math.random() * (max + 1 - min) + min)));
+    return (Math.floor((Math.random() * (max + 1 - min) + min)));
   } else
     return (Math.floor((Math.random() * (max + 1 - min) + min)));
-
 }
 
 
@@ -22,12 +19,12 @@ const checkStringLength = function (STR, MAXLENGTH) {
 }
 
 const getRandomValue = (arr) => {
-  const randArray = getRandomBetween(0, arr.length);
+  const randomValueFromInterval = getRandomBetween(0, arr.length);
 
-  return arr[randArray];
+  return arr[randomValueFromInterval];
 };
 
-let callback = () => Math.floor(Math.random() * 3) - 1; //получает значения -1,0,1 для метода sort
+let callbackForSortMethod = () => Math.floor(Math.random() * 3) - 1; //получает значения -1,0,1 для метода sort
 
 /**
  * получает случайное колличество значений из массива
@@ -37,7 +34,8 @@ let callback = () => Math.floor(Math.random() * 3) - 1; //получает зн�
 
 const getRandomTextFromArr = (message) => {
   const MESSAGE_COPY = message.slice();
-  return MESSAGE_COPY.sort(callback).slice(0, getRandomBetween(1, 2));// случайное колличество значений из заданного диапазона, которое нужно достать из массива
+  const maxQantityMessages = 3;
+  return MESSAGE_COPY.sort(callbackForSortMethod).slice(getRandomBetween(0, 1),maxQantityMessages); // случайное колличество значений из заданного диапазона, которое нужно достать из массива
 }
 
 export {

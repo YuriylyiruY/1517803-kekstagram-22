@@ -5,8 +5,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="https://unpkg.com/nouislider@14.6.3/distribute/nouislider.min.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <script src="https://unpkg.com/nouislider@14.6.3/distribute/nouislider.min.js"></script>
   <script defer type="module" src="js/main.js"></script>
   <title>Кекстаграм</title>
 </head>
@@ -39,11 +41,12 @@
 
             <!-- Изначальное состояние поля для загрузки изображения -->
             <fieldset class="img-upload__start">
-              <input type="file" id="upload-file" class="img-upload__input  visually-hidden" name="filename" required>
+              <input type="file" accept="image/png, image/jpeg" id="upload-file"
+                class="img-upload__input  visually-hidden" name="filename" required>
               <!---->
               <label for="upload-file" class="img-upload__label  img-upload__control">Загрузить</label>
             </fieldset>
-
+            <!--                         UPLOAD                                 -->
             <!-- Форма редактирования изображения -->
             <div class="img-upload__overlay  hidden ">
               <div class="img-upload__wrapper">
@@ -84,7 +87,7 @@
                       </label>
                     </li>
                     <li class="effects__item">
-                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-chrome"
+                      <input type="radio" class="effects__radio visually-hidden " name="effect" id="effect-chrome"
                         value="chrome">
                       <label for="effect-chrome" class="effects__label">
                         <span class="effects__preview  effects__preview--chrome">Превью эффекта Хром</span>

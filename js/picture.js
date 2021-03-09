@@ -1,13 +1,17 @@
 import {
-  getClickHandler
-} from './bigPictures.js';
+  getObjectDataPic
+
+} from './bigPicture.js';
 
 const PICTURES_NODE = document.querySelector('.pictures');
 const TEMPLATE_FRAGMENT = document.querySelector('#picture'); // Находим фрагмент с содержимым темплейта
 
+
+
+
 /**
  * заполняется разметка маленькой картинки
- * @param {*} data - массив объектов, со вложенными коментами
+ * @param {*} data - объект, со вложенными коментами
  * @returns фрагмент .picture с значениями
  */
 const renderPicture = (data) => {
@@ -35,6 +39,7 @@ const renderPictures = (pictures) => {
   pictures.forEach(data => {
     const picture = renderPicture(data);
     fragmentBox.appendChild(picture);
+
   });
   return fragmentBox;
 
@@ -55,7 +60,8 @@ const removeChildren = (parent, selector) => {
 const placePictures = (pictures) => {
   removeChildren(PICTURES_NODE, '.picture');
   PICTURES_NODE.appendChild(renderPictures(pictures));
-  PICTURES_NODE.addEventListener('click', getClickHandler(pictures));
+  const OBJECTS_DATE_PICTURES = getObjectDataPic(pictures);
+  PICTURES_NODE.addEventListener('click', OBJECTS_DATE_PICTURES);
 }
 
 export {
