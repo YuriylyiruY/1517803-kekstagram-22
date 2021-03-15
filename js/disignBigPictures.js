@@ -323,7 +323,7 @@ const handleHashtagsChange = (evt) => {
 
 HASHTAG.addEventListener('input', handleHashtagsChange);
 
-const validateHashtags1 = (str) => {
+const validateCommentText = (str) => {
   // 3 правило
   if (str.length === 0) {
     return false;
@@ -334,16 +334,16 @@ const validateHashtags1 = (str) => {
   }
 }
 
-const handleHashtagsChange1 = (evt) => {
+const handleCommentTextChange = (evt) => {
   const element = evt.target;
   const value = element.value;
-  const error = validateHashtags1(value);
+  const error = validateCommentText(value);
 
   element.setCustomValidity(error || '');
   element.reportValidity();
 }
 
-TEXT_COMENT_AUTOR.addEventListener('input', handleHashtagsChange1);
+TEXT_COMENT_AUTOR.addEventListener('input', handleCommentTextChange);
 
 
 export {
