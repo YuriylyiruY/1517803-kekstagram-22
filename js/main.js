@@ -6,6 +6,10 @@ import {
   placePictures
 } from './picture.js';
 
+import{
+  handleHashtagsChange
+} from './disignBigPictures.js'
+
 const PICTURE_COUNT = 25;
 let DATA = getPhotos(PICTURE_COUNT);
 placePictures(DATA);
@@ -19,3 +23,4 @@ placePictures(DATA);
  * 5. Вставить содержимое картинки в атрибут src  соответствующего элемента формы
  * 6. Показать форму
  */
+
