@@ -58,6 +58,7 @@ const removeChildren = (parent, selector) => {
  * @param {*} pictures массив объектов (аналог data, DATA из майн )
  */
 const placePictures = (pictures) => {
+  //console.log(pictures);
   removeChildren(PICTURES_NODE, '.picture');
   PICTURES_NODE.appendChild(renderPictures(pictures));
   const OBJECTS_DATE_PICTURES = getObjectDataPic(pictures);

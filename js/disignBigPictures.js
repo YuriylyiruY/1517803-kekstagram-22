@@ -1,4 +1,5 @@
 //6 level
+import {showAlert,showPass} from './util.js';
 
 const UPLOAD_FILE = document.querySelector('#upload-file');
 const UPLOAD_FILE_CANCEL = document.querySelector('.img-upload__cancel');
@@ -345,7 +346,44 @@ const handleCommentTextChange = (evt) => {
 
 TEXT_COMENT_AUTOR.addEventListener('input', handleCommentTextChange);
 
+const FORM_SUBMIT = document.querySelector('.img-upload__form');
+
+
+const ClosePopupAfterSubmit = () => {
+
+  UPLOAD_OVERLAY.classList.add('hidden');
+  BODY.classList.remove('modal-open');
+}
+
+
+
+const setUserFormSubmit = (onSuccess) => {
+  FORM_SUBMIT.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const formData = new FormData(evt.target);
+    fetch(
+      'https://22.javascript.pages.academy/kekstagram', {
+        method: 'POST',
+        body: formData,
+      },
+    )
+      .then((response) => {
+        if (response.ok) {
+          onSuccess(); showPass('Форма отправлена');
+        } else {
+          showAlert('Не удалось отправить форму. Попробуйте ещё раз');
+        }
+      })
+      .catch(() => {
+        showAlert('Не удалось отправить форму. Попробуйте ещё раз');
+      });
+  });
+};
+
 
 export {
-  handleHashtagsChange
+  handleHashtagsChange,
+  ClosePopupAfterSubmit,
+  setUserFormSubmit
+
 }

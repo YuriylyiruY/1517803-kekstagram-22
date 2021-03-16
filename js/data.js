@@ -52,9 +52,8 @@ const createPhoto = (id) => ({
   id,
   url: `photos/${id}.jpg`,
   likes: getRandomBetween(START_NUM_ID, END_NUM_ID),
-  // description: `autor${id} say it is a cool photo`,
   comments: getComments(getRandomBetween(2, 5)),
-  author: createComment(id),
+  description: createComment(id),
 });
 
 /**

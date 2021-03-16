@@ -6,14 +6,15 @@ import {
   placePictures
 } from './picture.js';
 
-import{
-  handleHashtagsChange
+import {
+  setUserFormSubmit,
+  ClosePopupAfterSubmit
 } from './disignBigPictures.js'
 
 const PICTURE_COUNT = 25;
 let DATA = getPhotos(PICTURE_COUNT);
-placePictures(DATA);
-
+// placePictures(DATA);
+//console.log(DATA);
 /**
  * Для задания 6
  * 1. На input file повесить обработчик change
@@ -24,3 +25,10 @@ placePictures(DATA);
  * 6. Показать форму
  */
 
+fetch('https://22.javascript.pages.academy/kekstagram/data')
+  .then((response) => response.json())
+  .then((wizards) => {
+    placePictures(wizards);
+  });
+
+setUserFormSubmit(ClosePopupAfterSubmit);

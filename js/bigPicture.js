@@ -2,7 +2,7 @@ const POPUP = document.querySelector('.big-picture');
 const POPUP_IMG = POPUP.querySelector('.big-picture__img img');
 const POPUP_SOCIAL = POPUP.querySelector('.big-picture__social');
 const POPUP_SOCIAL_HEADER = POPUP_SOCIAL.querySelector('.social__header');
-const POPUP_SOCIAL_PICTURE = POPUP_SOCIAL_HEADER.querySelector('.social__picture');
+//const POPUP_SOCIAL_PICTURE = POPUP_SOCIAL_HEADER.querySelector('.social__picture');
 const POPUP_SOCIAL_CAPTION = POPUP_SOCIAL_HEADER.querySelector('.social__caption');
 const POPUP_SOCIAL_LIKES = POPUP_SOCIAL_HEADER.querySelector('.social__likes .likes-count');
 const POPUP_COMMENS_COUNT = POPUP_SOCIAL.querySelector('.social__comment-count .comments-count');
@@ -25,10 +25,10 @@ const TEMPLATE_FOR_ONE_COMMENT = document.querySelector('#social__comment').cont
  */
 
 const getComment = (data) => {
+  //console.log(data);
   const element = TEMPLATE_FOR_ONE_COMMENT.querySelector('.social__comment').cloneNode(true);
   const img = element.querySelector('.social__picture');
   const text = element.querySelector('.social__text');
-
   img.setAttribute('src', data.avatar);
   img.setAttribute('alt', data.name);
   text.textContent = data.message;
@@ -41,16 +41,35 @@ const getComment = (data) => {
  * @param {*} comments
  * @returns возращает коробочку
  */
+const MAX_QUANTITI_COMMENTS = 5;
 
 const getComments = (comments) => {
   const fragment = document.createDocumentFragment();
-
-  comments.forEach(comment => {
+  comments.slice(0, MAX_QUANTITI_COMMENTS).forEach(comment => {
     fragment.appendChild(getComment(comment));
+
   });
 
   return fragment;
 }
+
+const COMMET_LOADER = document.querySelector('.social__comments-loader');
+COMMET_LOADER.classList.remove('hidden');
+
+// COMMENT_LOADER.addEventListener('click', () => {
+//   getComments();
+//   const getComments = (comments) => {
+//     const fragment = document.createDocumentFragment();
+
+//     comments.slice(0, 3).forEach(comment => {
+//       fragment.appendChild(getComment(comment));
+
+//     });
+
+//     return fragment;
+//   }
+// });
+
 
 /**
  * Заполняется разметка большой картинки  в том числе комментарии.
@@ -58,17 +77,21 @@ const getComments = (comments) => {
  */
 
 const fillBigPic = (data) => {
+
   POPUP_IMG.setAttribute('src', data.url);
   POPUP_IMG.setAttribute('alt', data.description);
   POPUP_SOCIAL_LIKES.textContent = data.likes;
-  POPUP_SOCIAL_CAPTION.textContent = data.author.message;
-  POPUP_SOCIAL_PICTURE.setAttribute('src', data.author.avatar);
-  POPUP_SOCIAL_PICTURE.setAttribute('alt', data.author.name);
+  POPUP_SOCIAL_CAPTION.textContent = data.description;
   POPUP_COMMENS_COUNT.textContent = data.comments.length;
+  // console.log(data.comments.length);
+  // if (data.comments.length > 5) {
+  //COMMENT_LOADER.classList.remove('hidden');console.log('ggggg');
+  // }
   POPUP_SOCIAL_COMMENTS.textContent = '';
   POPUP_SOCIAL_COMMENTS.appendChild(getComments(data.comments)); // добавляем в DOM темлеты коментов
 
 }
+
 
 const closeHandler = () => {
   POPUP.classList.add('hidden');
@@ -112,6 +135,7 @@ const getObjectDataPic = pictures => (evt) => {
 
     openPopup(photo);
   }
+
 
 }
 export {
