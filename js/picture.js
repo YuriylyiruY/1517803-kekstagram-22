@@ -3,8 +3,8 @@ import {
 
 } from './bigPicture.js';
 
-const PICTURES_NODE = document.querySelector('.pictures');
-const TEMPLATE_FRAGMENT = document.querySelector('#picture'); // Находим фрагмент с содержимым темплейта
+const pictureNode = document.querySelector('.pictures');
+const templateFragment = document.querySelector('#picture'); // Находим фрагмент с содержимым темплейта
 
 
 
@@ -16,7 +16,7 @@ const TEMPLATE_FRAGMENT = document.querySelector('#picture'); // Находим 
  */
 const renderPicture = (data) => {
 
-  const element = TEMPLATE_FRAGMENT.content.cloneNode(true); // Клонируем элемент со всеми "внутренностями"
+  const element = templateFragment.content.cloneNode(true); // Клонируем элемент со всеми "внутренностями"
   const img = element.querySelector('.picture__img');
   const commentQuantity = element.querySelector('.picture__comments');
   const likes = element.querySelector('.picture__likes');
@@ -59,10 +59,10 @@ const removeChildren = (parent, selector) => {
  */
 const placePictures = (pictures) => {
   //console.log(pictures);
-  removeChildren(PICTURES_NODE, '.picture');
-  PICTURES_NODE.appendChild(renderPictures(pictures));
+  removeChildren(pictureNode, '.picture');
+  pictureNode.appendChild(renderPictures(pictures));
   const OBJECTS_DATE_PICTURES = getObjectDataPic(pictures);
-  PICTURES_NODE.addEventListener('click', OBJECTS_DATE_PICTURES);
+  pictureNode.addEventListener('click', OBJECTS_DATE_PICTURES);
 }
 
 export {

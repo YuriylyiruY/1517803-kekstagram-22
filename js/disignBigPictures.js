@@ -1,51 +1,51 @@
 //6 level
 import {showAlert,showPass} from './util.js';
 
-const UPLOAD_FILE = document.querySelector('#upload-file');
-const UPLOAD_FILE_CANCEL = document.querySelector('.img-upload__cancel');
-const UPLOAD_OVERLAY = document.querySelector('.img-upload__overlay');
-const BODY = document.querySelector('body');
+const uploadFile = document.querySelector('#upload-file');
+const uploadFileCancel = document.querySelector('.img-upload__cancel');
+const uploadOverlay = document.querySelector('.img-upload__overlay');
+const body = document.querySelector('body');
 
-UPLOAD_FILE_CANCEL.addEventListener('click', function () {
-  UPLOAD_OVERLAY.classList.add('hidden');
-  BODY.classList.remove('modal-open');
+uploadFileCancel.addEventListener('click', function () {
+  uploadOverlay.classList.add('hidden');
+  body.classList.remove('modal-open');
 
 });
 
-UPLOAD_FILE_CANCEL.addEventListener('keydown', (evt) => {
+uploadFileCancel.addEventListener('keydown', (evt) => {
   if (evt.key === ('Escape' || 'Esc')) {
-    UPLOAD_OVERLAY.classList.add('hidden');
-    BODY.classList.remove('modal-open');
+    uploadOverlay.classList.add('hidden');
+    body.classList.remove('modal-open');
   }
 });
-UPLOAD_FILE.addEventListener('change', function () {
-  UPLOAD_OVERLAY.classList.remove('hidden');
-  BODY.classList.add('modal-open');
+uploadFile.addEventListener('change', function () {
+  uploadOverlay.classList.remove('hidden');
+  body.classList.add('modal-open');
 
 });
 
 
-const IMG_UPLOAD_EFFECT_LEVEL = document.querySelector('.img-upload__effect-level');
-const SLIDER_ELEMENT = IMG_UPLOAD_EFFECT_LEVEL.querySelector('.effect-level__slider');
-const UP_SCALE = document.querySelector('.scale__control--bigger');
-const DOWN_SCALE = document.querySelector('.scale__control--smaller');
-const SCALE_VALUE = document.querySelector('.scale__control--value');
+const imgUploadEffectLevel = document.querySelector('.img-upload__effect-level');
+const sliderElement = imgUploadEffectLevel.querySelector('.effect-level__slider');
+const upScale = document.querySelector('.scale__control--bigger');
+const downScale = document.querySelector('.scale__control--smaller');
+const scaleValue = document.querySelector('.scale__control--value');
 
-const IMG_UPLOAD_PREVIEW = document.querySelector('.img-upload__preview');
+const imgUploadPreviw = document.querySelector('.img-upload__preview');
 
-const IMG_UPLOAD_EFFECTS = document.querySelector('.img-upload__effects');
-const EFFECTS_LIST = IMG_UPLOAD_EFFECTS.querySelector('.effects__list');
+const imgUploadEffect = document.querySelector('.img-upload__effects');
+const effectList = imgUploadEffect.querySelector('.effects__list');
 
-const EFFECT_NONE = EFFECTS_LIST.querySelector('.effects__item #effect-none');
-const EFFECT_CHROME = EFFECTS_LIST.querySelector('.effects__item #effect-chrome');
-const EFFECT_SEPIA = EFFECTS_LIST.querySelector('.effects__item #effect-sepia');
-const EFFECT_MARVIN = EFFECTS_LIST.querySelector('.effects__item #effect-marvin');
-const EFFECT_PHOBOS = EFFECTS_LIST.querySelector('.effects__item #effect-phobos');
-const EFFECT_HEAT = EFFECTS_LIST.querySelector('.effects__item #effect-heat');
+const effectNone = effectList.querySelector('.effects__item #effect-none');
+const effectChrome = effectList.querySelector('.effects__item #effect-chrome');
+const effectSepia = effectList.querySelector('.effects__item #effect-sepia');
+const effectMarvin = effectList.querySelector('.effects__item #effect-marvin');
+const effectPhobos = effectList.querySelector('.effects__item #effect-phobos');
+const effectHeat = effectList.querySelector('.effects__item #effect-heat');
 
 
 /* global noUiSlider:readonly */
-noUiSlider.create(SLIDER_ELEMENT, {
+noUiSlider.create(sliderElement, {
   range: {
     min: 0,
     max: 1,
@@ -66,9 +66,9 @@ noUiSlider.create(SLIDER_ELEMENT, {
   },
 })
 
-EFFECT_CHROME.addEventListener('change', (evt) => {
+effectChrome.addEventListener('change', (evt) => {
   if (evt.target.checked) {
-    SLIDER_ELEMENT.noUiSlider.updateOptions({
+    sliderElement.noUiSlider.updateOptions({
       range: {
         min: 0,
         max: 1,
@@ -79,9 +79,9 @@ EFFECT_CHROME.addEventListener('change', (evt) => {
   }
 });
 
-EFFECT_SEPIA.addEventListener('change', (evt) => {
+effectSepia.addEventListener('change', (evt) => {
   if (evt.target.checked) {
-    SLIDER_ELEMENT.noUiSlider.updateOptions({
+    sliderElement.noUiSlider.updateOptions({
       range: {
         min: 0,
         max: 1,
@@ -92,9 +92,9 @@ EFFECT_SEPIA.addEventListener('change', (evt) => {
   }
 });
 
-EFFECT_MARVIN.addEventListener('change', (evt) => {
+effectMarvin.addEventListener('change', (evt) => {
   if (evt.target.checked) {
-    SLIDER_ELEMENT.noUiSlider.updateOptions({
+    sliderElement.noUiSlider.updateOptions({
       range: {
         min: 0,
         max: 100,
@@ -105,9 +105,9 @@ EFFECT_MARVIN.addEventListener('change', (evt) => {
   }
 });
 
-EFFECT_PHOBOS.addEventListener('change', (evt) => {
+effectPhobos.addEventListener('change', (evt) => {
   if (evt.target.checked) {
-    SLIDER_ELEMENT.noUiSlider.updateOptions({
+    sliderElement.noUiSlider.updateOptions({
       range: {
         min: 0,
         max: 3,
@@ -118,9 +118,9 @@ EFFECT_PHOBOS.addEventListener('change', (evt) => {
   }
 });
 
-EFFECT_HEAT.addEventListener('change', (evt) => {
+effectHeat.addEventListener('change', (evt) => {
   if (evt.target.checked) {
-    SLIDER_ELEMENT.noUiSlider.updateOptions({
+    sliderElement.noUiSlider.updateOptions({
       range: {
         min: 0,
         max: 3,
@@ -131,115 +131,115 @@ EFFECT_HEAT.addEventListener('change', (evt) => {
   }
 });
 //===============================================================================
-EFFECT_NONE.addEventListener('click', function () {
+effectNone.addEventListener('click', function () {
 
-  SLIDER_ELEMENT.noUiSlider.on('update', () => {
-    IMG_UPLOAD_PREVIEW.style.filter = 'none';
+  sliderElement.noUiSlider.on('update', () => {
+    imgUploadPreviw.style.filter = 'none';
 
   });
 
-  IMG_UPLOAD_PREVIEW.classList.remove('effects__preview--heat', 'effects__preview--chrome', 'effects__preview--sepia',
+  imgUploadPreviw.classList.remove('effects__preview--heat', 'effects__preview--chrome', 'effects__preview--sepia',
     'effects__preview--marvin', 'effects__preview--phobos');
 
-  IMG_UPLOAD_PREVIEW.classList.add('effects__preview--none');
+  imgUploadPreviw.classList.add('effects__preview--none');
 });
 
 
-EFFECT_SEPIA.addEventListener('click', function () {
-  IMG_UPLOAD_PREVIEW.style.filter = 'sepia(1)';
+effectSepia.addEventListener('click', function () {
+  imgUploadPreviw.style.filter = 'sepia(1)';
 
-  SLIDER_ELEMENT.noUiSlider.on('update', (values, handle) => {
-    IMG_UPLOAD_PREVIEW.style.filter = `sepia(${values[handle]})`;
+  sliderElement.noUiSlider.on('update', (values, handle) => {
+    imgUploadPreviw.style.filter = `sepia(${values[handle]})`;
   });
 
-  IMG_UPLOAD_PREVIEW.classList.remove('effects__preview--heat', 'effects__preview--chrome', 'effects__preview--none',
+  imgUploadPreviw.classList.remove('effects__preview--heat', 'effects__preview--chrome', 'effects__preview--none',
     'effects__preview--marvin', 'effects__preview--phobos');
 
-  IMG_UPLOAD_PREVIEW.classList.add('effects__preview--sepia');
+  imgUploadPreviw.classList.add('effects__preview--sepia');
 });
 
-EFFECT_CHROME.addEventListener('click', function () {
-  IMG_UPLOAD_PREVIEW.style.filter = 'grayscale(1)';
+effectChrome.addEventListener('click', function () {
+  imgUploadPreviw.style.filter = 'grayscale(1)';
 
-  SLIDER_ELEMENT.noUiSlider.on('update', (values, handle) => {
-    IMG_UPLOAD_PREVIEW.style.filter = `grayscale(${values[handle]})`;
+  sliderElement.noUiSlider.on('update', (values, handle) => {
+    imgUploadPreviw.style.filter = `grayscale(${values[handle]})`;
   });
 
-  IMG_UPLOAD_PREVIEW.classList.remove('effects__preview--heat', 'effects__preview--sepia', 'effects__preview--none',
+  imgUploadPreviw.classList.remove('effects__preview--heat', 'effects__preview--sepia', 'effects__preview--none',
     'effects__preview--marvin', 'effects__preview--phobos');
 
-  IMG_UPLOAD_PREVIEW.classList.add('effects__preview--chrome');
+  imgUploadPreviw.classList.add('effects__preview--chrome');
 });
 
-EFFECT_MARVIN.addEventListener('click', function () {
-  IMG_UPLOAD_PREVIEW.style.filter = 'invert(100%)';
+effectMarvin.addEventListener('click', function () {
+  imgUploadPreviw.style.filter = 'invert(100%)';
 
-  SLIDER_ELEMENT.noUiSlider.on('update', (values, handle) => {
-    IMG_UPLOAD_PREVIEW.style.filter = `invert(${values[handle]}%)`;
+  sliderElement.noUiSlider.on('update', (values, handle) => {
+    imgUploadPreviw.style.filter = `invert(${values[handle]}%)`;
   });
 
-  IMG_UPLOAD_PREVIEW.classList.remove('effects__preview--heat', 'effects__preview--sepia', 'effects__preview--none',
+  imgUploadPreviw.classList.remove('effects__preview--heat', 'effects__preview--sepia', 'effects__preview--none',
     'effects__preview--chrome', 'effects__preview--phobos');
 
-  IMG_UPLOAD_PREVIEW.classList.add('effects__preview--marvin');
+  imgUploadPreviw.classList.add('effects__preview--marvin');
 });
 
-EFFECT_PHOBOS.addEventListener('click', function () {
-  IMG_UPLOAD_PREVIEW.style.filter = 'blur(20px)';
+effectPhobos.addEventListener('click', function () {
+  imgUploadPreviw.style.filter = 'blur(20px)';
 
-  SLIDER_ELEMENT.noUiSlider.on('update', (values, handle) => {
-    IMG_UPLOAD_PREVIEW.style.filter = `blur(${values[handle]}px)`;
+  sliderElement.noUiSlider.on('update', (values, handle) => {
+    imgUploadPreviw.style.filter = `blur(${values[handle]}px)`;
   });
 
-  IMG_UPLOAD_PREVIEW.classList.remove('effects__preview--heat', 'effects__preview--sepia', 'effects__preview--none',
+  imgUploadPreviw.classList.remove('effects__preview--heat', 'effects__preview--sepia', 'effects__preview--none',
     'effects__preview--chrome', 'effects__preview--marvin');
 
-  IMG_UPLOAD_PREVIEW.classList.add('effects__preview--phobos');
+  imgUploadPreviw.classList.add('effects__preview--phobos');
 });
 
-EFFECT_HEAT.addEventListener('click', function () {
-  IMG_UPLOAD_PREVIEW.style.filter = 'brightness(20)';
+effectHeat.addEventListener('click', function () {
+  imgUploadPreviw.style.filter = 'brightness(20)';
 
-  SLIDER_ELEMENT.noUiSlider.on('update', (values, handle) => {
-    IMG_UPLOAD_PREVIEW.style.filter = `brightness(${values[handle]})`;
+  sliderElement.noUiSlider.on('update', (values, handle) => {
+    imgUploadPreviw.style.filter = `brightness(${values[handle]})`;
   });
 
-  IMG_UPLOAD_PREVIEW.classList.remove('effects__preview--phobos', 'effects__preview--sepia', 'effects__preview--none',
+  imgUploadPreviw.classList.remove('effects__preview--phobos', 'effects__preview--sepia', 'effects__preview--none',
     'effects__preview--chrome', 'effects__preview--marvin');
 
-  IMG_UPLOAD_PREVIEW.classList.add('effects__preview--heat');
+  imgUploadPreviw.classList.add('effects__preview--heat');
 });
 
 //=======================================
 let counter = 100;
-SCALE_VALUE.value = counter + '%';
+scaleValue.value = counter + '%';
 
-UP_SCALE.addEventListener('click', function () {
+upScale.addEventListener('click', function () {
   if (counter <= 99) {
 
     counter += 25;
-    SCALE_VALUE.value = counter + '%';
+    scaleValue.value = counter + '%';
 
-    IMG_UPLOAD_PREVIEW.style.transform = `scale(0.${counter})`;
+    imgUploadPreviw.style.transform = `scale(0.${counter})`;
     if (counter == 100) {
-      IMG_UPLOAD_PREVIEW.style.transform = 'scale(1)';
+      imgUploadPreviw.style.transform = 'scale(1)';
     }
   }
 
 });
 
-DOWN_SCALE.addEventListener('click', function () {
+downScale.addEventListener('click', function () {
   if (counter >= 26) {
     counter -= 25;
-    SCALE_VALUE.value = counter + '%';
-    IMG_UPLOAD_PREVIEW.style.transform = `scale(0.${counter})`;
+    scaleValue.value = counter + '%';
+    imgUploadPreviw.style.transform = `scale(0.${counter})`;
   }
 
 });
 //===========================================
 //level 6.2
-const HASHTAG = document.querySelector('.text__hashtags');
-const TEXT_COMENT_AUTOR = document.querySelector('.text__description');
+const hashtag = document.querySelector('.text__hashtags');
+const textComentAutor = document.querySelector('.text__description');
 // хэш-тег начинается с символа # (решётка);
 // строка после решётки должна состоять из букв и чисел и не может содержать пробелы,
 //    спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.;
@@ -256,9 +256,9 @@ const TEXT_COMENT_AUTOR = document.querySelector('.text__description');
 // если фокус находится в поле ввода комментария, нажатие на Esc не должно приводить к закрытию формы редактирования изображения.
 
 
-const IS_VALID_HASHTAG_REGEXP = /^#[\wа-яА-ЯЁё]{1,19}$/;
-const TAGS_COUNT_MAX = 5;
-const COMMENT_AUTOR_LEIGTH_MAX = 140;
+const isValidHashtagRegexp = /^#[\wа-яА-ЯЁё]{1,19}$/;
+const tagsCountMax = 5;
+const commentAutorLengthMax = 140;
 
 /**
  * Провалидировать хештег по следующим требованиям:
@@ -272,7 +272,7 @@ const COMMENT_AUTOR_LEIGTH_MAX = 140;
  * @param {*} str
  * @returns
  */
-const validateHashtag = (str) => !IS_VALID_HASHTAG_REGEXP.test(str);
+const validatehashtag = (str) => !isValidHashtagRegexp.test(str);
 
 /**
  * Разбить строку по пробелам, в цикле вызвать валидатор для подстроки,
@@ -286,7 +286,7 @@ const validateHashtag = (str) => !IS_VALID_HASHTAG_REGEXP.test(str);
  * @param {*} str
  * @returns
  */
-const validateHashtags = (str) => {
+const validatehashtags = (str) => {
   // 3 правило
   if (str.length === 0) {
     return false;
@@ -294,14 +294,14 @@ const validateHashtags = (str) => {
 
   const tags = str.toLowerCase().split(' ');
 
-  if (tags.length > TAGS_COUNT_MAX) {
-    return `не больше ${TAGS_COUNT_MAX} хештегов`;
+  if (tags.length > tagsCountMax) {
+    return `не больше ${tagsCountMax} хештегов`;
   }
 
-  const invalidHashtag = tags.find(validateHashtag);
+  const invalidhashtag = tags.find(validatehashtag);
 
-  if (invalidHashtag) {
-    return ` Тег невалиден ${invalidHashtag}`;
+  if (invalidhashtag) {
+    return ` Тег невалиден ${invalidhashtag}`;
   }
 
   const uniqueTags = new Set(tags);
@@ -313,16 +313,16 @@ const validateHashtags = (str) => {
   return false;
 }
 
-const handleHashtagsChange = (evt) => {
+const handlehashtagsChange = (evt) => {
   const element = evt.target;
   const value = element.value;
-  const error = validateHashtags(value);
+  const error = validatehashtags(value);
 
   element.setCustomValidity(error || '');
   element.reportValidity();
 }
 
-HASHTAG.addEventListener('input', handleHashtagsChange);
+hashtag.addEventListener('input', handlehashtagsChange);
 
 const validateCommentText = (str) => {
   // 3 правило
@@ -330,8 +330,8 @@ const validateCommentText = (str) => {
     return false;
   }
 
-  if (str.length > COMMENT_AUTOR_LEIGTH_MAX) {
-    return `Длина строки не должна превышать ${COMMENT_AUTOR_LEIGTH_MAX} символов`;
+  if (str.length > commentAutorLengthMax) {
+    return `Длина строки не должна превышать ${commentAutorLengthMax} символов`;
   }
 }
 
@@ -344,21 +344,21 @@ const handleCommentTextChange = (evt) => {
   element.reportValidity();
 }
 
-TEXT_COMENT_AUTOR.addEventListener('input', handleCommentTextChange);
+textComentAutor.addEventListener('input', handleCommentTextChange);
 
-const FORM_SUBMIT = document.querySelector('.img-upload__form');
+const formSubmit = document.querySelector('.img-upload__form');
 
 
 const ClosePopupAfterSubmit = () => {
 
-  UPLOAD_OVERLAY.classList.add('hidden');
-  BODY.classList.remove('modal-open');
+  uploadOverlay.classList.add('hidden');
+  body.classList.remove('modal-open');
 }
 
 
 
 const setUserFormSubmit = (onSuccess) => {
-  FORM_SUBMIT.addEventListener('submit', (evt) => {
+  formSubmit.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const formData = new FormData(evt.target);
     fetch(
@@ -369,7 +369,8 @@ const setUserFormSubmit = (onSuccess) => {
     )
       .then((response) => {
         if (response.ok) {
-          onSuccess(); showPass('Форма отправлена');
+          onSuccess(); formSubmit.reset(); showPass('Форма отправлена');
+
         } else {
           showAlert('Не удалось отправить форму. Попробуйте ещё раз');
         }
@@ -382,7 +383,7 @@ const setUserFormSubmit = (onSuccess) => {
 
 
 export {
-  handleHashtagsChange,
+  handlehashtagsChange,
   ClosePopupAfterSubmit,
   setUserFormSubmit
 

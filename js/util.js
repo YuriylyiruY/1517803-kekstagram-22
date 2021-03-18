@@ -33,9 +33,9 @@ let callbackForSortMethod = () => Math.floor(Math.random() * 3) - 1; //полу�
  */
 
 const getRandomTextFromArr = (message) => {
-  const MESSAGE_COPY = message.slice();
-  const maxQantityMessages = 3;
-  return MESSAGE_COPY.sort(callbackForSortMethod).slice(getRandomBetween(0, 1),maxQantityMessages); // случайное колличество значений из заданного диапазона, которое нужно достать из массива
+  const messageCopy = message.slice();
+  const MAX_QUANTITY_MESSAGE = 3;
+  return messageCopy.sort(callbackForSortMethod).slice(getRandomBetween(0, 1),MAX_QUANTITY_MESSAGE); // случайное колличество значений из заданного диапазона, которое нужно достать из массива
 }
 const ALERT_SHOW_TIME = 5000;
 
