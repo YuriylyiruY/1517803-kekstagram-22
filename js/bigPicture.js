@@ -8,7 +8,6 @@ const popupCommentsCount = popupSocial.querySelector('.social__comment-count .co
 const popupSocialComments = popupSocial.querySelector('.social__comments');
 
 
-
 const commentsLoader = document.querySelector('.comments-loader ');
 const socialCommentCount = document.querySelector('.social__comment-count');
 const body = document.querySelector('body');
@@ -40,12 +39,12 @@ const getComment = (data) => {
  * @param {*} comments
  * @returns возращает коробочку
  */
-const maxQuantityComments = 5;
+
 
 const getComments = (comments) => {
   const fragment = document.createDocumentFragment();
 
-  comments.slice(0, maxQuantityComments).forEach(comment => {
+  comments.forEach(comment => {
     fragment.appendChild(getComment(comment));
 
 
@@ -70,7 +69,23 @@ const fillBigPic = (data) => {
   popupSocialCaption.textContent = data.description;
   popupCommentsCount.textContent = data.comments.length;
   popupSocialComments.textContent = '';
-  popupSocialComments.appendChild(getComments(data.comments)); // добавляем в DOM темлеты коментов
+
+  let MAX_QUANTITY_COMMENTS = 5;
+  let MIN_QUANTITY_COMMENTS = 0;
+  popupSocialComments.appendChild(getComments(data.comments.slice(MIN_QUANTITY_COMMENTS, MAX_QUANTITY_COMMENTS)));
+
+
+  commentLoader.onclick = () => {
+    popupSocialComments.textContent = '';
+    MAX_QUANTITY_COMMENTS += 5;
+    MIN_QUANTITY_COMMENTS += 5;
+    popupSocialComments.appendChild(getComments(data.comments.slice(MIN_QUANTITY_COMMENTS, MAX_QUANTITY_COMMENTS)));
+    if (MIN_QUANTITY_COMMENTS > data.comments.length) {
+      commentLoader.classList.add('hidden');
+    }
+  }
+
+
 }
 
 const addComments = (data) => {
@@ -101,7 +116,6 @@ const openPopup = (data) => {
   popapCancel.addEventListener('click', closeHandler);
   body.classList.add('modal-open');
   addComments(data);
-  //commentsLoader.classList.add('hidden');
   socialCommentCount.classList.add('hidden');
 }
 
