@@ -1,3 +1,6 @@
+const ALERT_SHOW_TIME = 5000;
+const PASS_SHOW_TIME = 5000;
+
 const getRandomBetween = function (fromNum, toNum) {
 
   if (isNaN(toNum) || isNaN(fromNum) || Array.isArray(toNum) || Array.isArray(fromNum) || fromNum < 0 || toNum < 0) {
@@ -37,7 +40,8 @@ const getRandomTextFromArr = (message) => {
   const MAX_QUANTITY_MESSAGE = 3;
   return messageCopy.sort(callbackForSortMethod).slice(getRandomBetween(0, 1),MAX_QUANTITY_MESSAGE); // случайное колличество значений из заданного диапазона, которое нужно достать из массива
 }
-const ALERT_SHOW_TIME = 5000;
+
+
 
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
@@ -59,7 +63,7 @@ const showAlert = (message) => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
 }
-const PASS_SHOW_TIME = 5000;
+
 
 const showPass = (message) => {
   const alertContainer = document.createElement('div');

@@ -6,24 +6,14 @@ const popupSocialCaption = popupSocialHeader.querySelector('.social__caption');
 const popupSocialLikes = popupSocialHeader.querySelector('.social__likes .likes-count');
 const popupCommentsCount = popupSocial.querySelector('.social__comment-count .comments-count');
 const popupSocialComments = popupSocial.querySelector('.social__comments');
-
-
 const commentsLoader = document.querySelector('.comments-loader ');
+const commentLoader = document.querySelector('.social__comments-loader');
 const socialCommentCount = document.querySelector('.social__comment-count');
 const body = document.querySelector('body');
-
 const popapCancel = document.querySelector('.big-picture__cancel');
 const TemplateForOneComment = document.querySelector('#social__comment').content;
 
-/**
- * заполняем данными темплет для одного комента пользователя
- *
- * @param {*} data
- * @returns возращаем заполненный темплет
- */
-
 const getComment = (data) => {
-  //console.log(data);
   const element = TemplateForOneComment.querySelector('.social__comment').cloneNode(true);
   const img = element.querySelector('.social__picture');
   const text = element.querySelector('.social__text');
@@ -34,19 +24,11 @@ const getComment = (data) => {
   return element;
 }
 
-/**заполняет темлеты в коробочку
- *
- * @param {*} comments
- * @returns возращает коробочку
- */
-
-
 const getComments = (comments) => {
   const fragment = document.createDocumentFragment();
 
   comments.forEach(comment => {
     fragment.appendChild(getComment(comment));
-
 
   });
 
@@ -54,15 +36,7 @@ const getComments = (comments) => {
 
 }
 
-const commentLoader = document.querySelector('.social__comments-loader');
-
-/**
- * Заполняется разметка большой картинки  в том числе комментарии.
- * @param {*} data - объект данных картинки
- */
-
 const fillBigPic = (data) => {
-
   popupImg.setAttribute('src', data.url);
   popupImg.setAttribute('alt', data.description);
   popupSocialLikes.textContent = data.likes;
@@ -74,7 +48,6 @@ const fillBigPic = (data) => {
   let MIN_QUANTITY_COMMENTS = 0;
   popupSocialComments.appendChild(getComments(data.comments.slice(MIN_QUANTITY_COMMENTS, MAX_QUANTITY_COMMENTS)));
 
-
   commentLoader.onclick = () => {
     popupSocialComments.textContent = '';
     MAX_QUANTITY_COMMENTS += 5;
@@ -84,14 +57,11 @@ const fillBigPic = (data) => {
       commentLoader.classList.add('hidden');
     }
   }
-
-
 }
 
 const addComments = (data) => {
   if (data.comments.length > 5) {
     commentLoader.classList.remove('hidden');
-
   } else {
     commentLoader.classList.add('hidden');
   }
@@ -131,7 +101,6 @@ const openPopup = (data) => {
  */
 
 const getObjectDataPic = pictures => (evt) => {
-
   if (evt.target.classList.contains('picture__img')) {
     const element = evt.target;
     const id = element.getAttribute('data-id'); // получили id картинки
@@ -139,7 +108,6 @@ const getObjectDataPic = pictures => (evt) => {
 
     openPopup(photo);
   }
-
 
 }
 export {

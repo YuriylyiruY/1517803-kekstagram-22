@@ -5,6 +5,27 @@ const uploadFile = document.querySelector('#upload-file');
 const uploadFileCancel = document.querySelector('.img-upload__cancel');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
+const hashtag = document.querySelector('.text__hashtags');
+const textComentAutor = document.querySelector('.text__description');
+const IS_VALID_HASHTAG_REGEXP = /^#[\wа-яА-ЯЁё]{1,19}$/;
+const TAGS_COUNT_MAX = 5;
+const COMMENT_AUTOR_LENGTH_MAX = 140;
+const formSubmit = document.querySelector('.img-upload__form');
+const imgUploadEffectLevel = document.querySelector('.img-upload__effect-level');
+const sliderElement = imgUploadEffectLevel.querySelector('.effect-level__slider');
+const upScale = document.querySelector('.scale__control--bigger');
+const downScale = document.querySelector('.scale__control--smaller');
+const scaleValue = document.querySelector('.scale__control--value');
+const imgUploadPreviw = document.querySelector('.img-upload__preview');
+const imgUploadEffect = document.querySelector('.img-upload__effects');
+const effectList = imgUploadEffect.querySelector('.effects__list');
+const effectNone = effectList.querySelector('.effects__item #effect-none');
+const effectChrome = effectList.querySelector('.effects__item #effect-chrome');
+const effectSepia = effectList.querySelector('.effects__item #effect-sepia');
+const effectMarvin = effectList.querySelector('.effects__item #effect-marvin');
+const effectPhobos = effectList.querySelector('.effects__item #effect-phobos');
+const effectHeat = effectList.querySelector('.effects__item #effect-heat');
+
 
 uploadFileCancel.addEventListener('click', function () {
   uploadOverlay.classList.add('hidden');
@@ -25,23 +46,7 @@ uploadFile.addEventListener('change', function () {
 });
 
 
-const imgUploadEffectLevel = document.querySelector('.img-upload__effect-level');
-const sliderElement = imgUploadEffectLevel.querySelector('.effect-level__slider');
-const upScale = document.querySelector('.scale__control--bigger');
-const downScale = document.querySelector('.scale__control--smaller');
-const scaleValue = document.querySelector('.scale__control--value');
 
-const imgUploadPreviw = document.querySelector('.img-upload__preview');
-
-const imgUploadEffect = document.querySelector('.img-upload__effects');
-const effectList = imgUploadEffect.querySelector('.effects__list');
-
-const effectNone = effectList.querySelector('.effects__item #effect-none');
-const effectChrome = effectList.querySelector('.effects__item #effect-chrome');
-const effectSepia = effectList.querySelector('.effects__item #effect-sepia');
-const effectMarvin = effectList.querySelector('.effects__item #effect-marvin');
-const effectPhobos = effectList.querySelector('.effects__item #effect-phobos');
-const effectHeat = effectList.querySelector('.effects__item #effect-heat');
 
 
 /* global noUiSlider:readonly */
@@ -130,7 +135,7 @@ effectHeat.addEventListener('change', (evt) => {
     });
   }
 });
-//===============================================================================
+
 effectNone.addEventListener('click', function () {
 
   sliderElement.noUiSlider.on('update', () => {
@@ -210,7 +215,7 @@ effectHeat.addEventListener('click', function () {
   imgUploadPreviw.classList.add('effects__preview--heat');
 });
 
-//=======================================
+
 let counter = 100;
 scaleValue.value = counter + '%';
 
@@ -221,7 +226,7 @@ upScale.addEventListener('click', function () {
     scaleValue.value = counter + '%';
 
     imgUploadPreviw.style.transform = `scale(0.${counter})`;
-    if (counter == 100) {
+    if (counter === 100) {
       imgUploadPreviw.style.transform = 'scale(1)';
     }
   }
@@ -236,77 +241,27 @@ downScale.addEventListener('click', function () {
   }
 
 });
-//===========================================
-//level 6.2
-const hashtag = document.querySelector('.text__hashtags');
-const textComentAutor = document.querySelector('.text__description');
-// хэш-тег начинается с символа # (решётка);
-// строка после решётки должна состоять из букв и чисел и не может содержать пробелы,
-//    спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.;
-// хеш-тег не может состоять только из одной решётки;
-// максимальная длина одного хэш-тега 20 символов, включая решётку;
-// хэш-теги нечувствительны к регистру: #ХэшТег и #хэштег считаются одним и тем же тегом;
-// хэш-теги разделяются пробелами;
-// один и тот же хэш-тег не может быть использован дважды;
-// нельзя указать больше пяти хэш-тегов;
-// хэш-теги необязательны;
 
-// комментарий не обязателен;
-// длина комментария не может составлять больше 140 символов;
-// если фокус находится в поле ввода комментария, нажатие на Esc не должно приводить к закрытию формы редактирования изображения.
+const validatehashtag = (str) => !IS_VALID_HASHTAG_REGEXP.test(str);
 
-
-const isValidHashtagRegexp = /^#[\wа-яА-ЯЁё]{1,19}$/;
-const tagsCountMax = 5;
-const commentAutorLengthMax = 140;
-
-/**
- * Провалидировать хештег по следующим требованиям:
- * хэш-тег начинается с символа # (решётка);
- * строка после решётки должна состоять из букв и чисел и не может содержать пробелы,
- *   спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.;
- * хеш-тег не может состоять только из одной решётки;
- * максимальная длина одного хэш-тега 20 символов, включая решётку;
- * хэш-теги нечувствительны к регистру: #ХэшТег и #хэштег считаются одним и тем же тегом;
- *
- * @param {*} str
- * @returns
- */
-const validatehashtag = (str) => !isValidHashtagRegexp.test(str);
-
-/**
- * Разбить строку по пробелам, в цикле вызвать валидатор для подстроки,
- * если подстрока не валидная то прервать цикл и вернуть текст ошибки.
- *
- * Если всё ок вернуть false.
- *
- * 1. один и тот же хэш-тег не может быть использован дважды;
- * 2. нельзя указать больше пяти хэш-тегов;
- * 3. хэш-теги необязательны;
- * @param {*} str
- * @returns
- */
 const validatehashtags = (str) => {
-  // 3 правило
+
   if (str.length === 0) {
     return false;
   }
 
   const tags = str.toLowerCase().split(' ');
-
-  if (tags.length > tagsCountMax) {
-    return `не больше ${tagsCountMax} хештегов`;
+  if (tags.length > TAGS_COUNT_MAX) {
+    return `не больше ${TAGS_COUNT_MAX} хештегов`;
   }
 
   const invalidhashtag = tags.find(validatehashtag);
-
   if (invalidhashtag) {
     return ` Тег невалиден ${invalidhashtag}`;
   }
 
   const uniqueTags = new Set(tags);
-
-  if (uniqueTags.size != tags.length) {
+  if (uniqueTags.size !== tags.length) {
     return 'Теги не должны дублироваться';
   }
 
@@ -325,13 +280,12 @@ const handlehashtagsChange = (evt) => {
 hashtag.addEventListener('input', handlehashtagsChange);
 
 const validateCommentText = (str) => {
-  // 3 правило
   if (str.length === 0) {
     return false;
   }
 
-  if (str.length > commentAutorLengthMax) {
-    return `Длина строки не должна превышать ${commentAutorLengthMax} символов`;
+  if (str.length > COMMENT_AUTOR_LENGTH_MAX) {
+    return `Длина строки не должна превышать ${COMMENT_AUTOR_LENGTH_MAX} символов`;
   }
 }
 
@@ -339,23 +293,16 @@ const handleCommentTextChange = (evt) => {
   const element = evt.target;
   const value = element.value;
   const error = validateCommentText(value);
-
   element.setCustomValidity(error || '');
   element.reportValidity();
 }
 
 textComentAutor.addEventListener('input', handleCommentTextChange);
 
-const formSubmit = document.querySelector('.img-upload__form');
-
-
 const ClosePopupAfterSubmit = () => {
-
   uploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
 }
-
-
 
 const setUserFormSubmit = (onSuccess) => {
   formSubmit.addEventListener('submit', (evt) => {
@@ -380,7 +327,6 @@ const setUserFormSubmit = (onSuccess) => {
       });
   });
 };
-
 
 export {
   handlehashtagsChange,

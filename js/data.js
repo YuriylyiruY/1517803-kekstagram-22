@@ -9,7 +9,7 @@ const START_NUM_ID = 15;
 const END_NUM_ID = 200;
 const START_NUM_AVATAR = 1;
 const END_NUM_AVATAR = 6;
-const message = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'В целом всё неплохо. Но не всё.',
+const messages = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'В целом всё неплохо. Но не всё.',
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают.', 'Как можно было поймать такой неудачный момент?!',
@@ -24,7 +24,7 @@ const message = ['Всё отлично!', 'В целом всё неплохо.
 const createComment = (id) => ({
   id,
   avatar: `img/avatar-${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}.svg`,
-  message: getRandomTextFromArr(message).join(''),
+  messages: getRandomTextFromArr(messages).join(''),
   name: `user${id}`,
 });
 
