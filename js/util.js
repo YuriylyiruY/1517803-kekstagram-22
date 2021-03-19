@@ -2,7 +2,6 @@ const ALERT_SHOW_TIME = 5000;
 const PASS_SHOW_TIME = 5000;
 
 const getRandomBetween = function (fromNum, toNum) {
-
   if (isNaN(toNum) || isNaN(fromNum) || Array.isArray(toNum) || Array.isArray(fromNum) || fromNum < 0 || toNum < 0) {
     throw new Error('Передано неверное значение.');
   }
@@ -16,14 +15,12 @@ const getRandomBetween = function (fromNum, toNum) {
     return (Math.floor((Math.random() * (max + 1 - min) + min)));
 }
 
-
 const checkStringLength = function (STR, MAXLENGTH) {
   return (STR.length <= MAXLENGTH);
 }
 
 const getRandomValue = (arr) => {
   const randomValueFromInterval = getRandomBetween(0, arr.length);
-
   return arr[randomValueFromInterval];
 };
 
@@ -54,9 +51,7 @@ const showAlert = (message) => {
   alertContainer.style.fontSize = '30px';
   alertContainer.style.textAlign = 'center';
   alertContainer.style.backgroundColor = 'red';
-
   alertContainer.textContent = message;
-
   document.body.append(alertContainer);
 
   setTimeout(() => {
@@ -76,17 +71,13 @@ const showPass = (message) => {
   alertContainer.style.fontSize = '30px';
   alertContainer.style.textAlign = 'center';
   alertContainer.style.backgroundColor = 'green';
-
   alertContainer.textContent = message;
-
   document.body.append(alertContainer);
 
   setTimeout(() => {
     alertContainer.remove();
   }, PASS_SHOW_TIME);
 }
-
-
 
 export {
   getRandomBetween,

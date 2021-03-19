@@ -1,5 +1,8 @@
-//6 level
-import {showAlert,showPass} from './util.js';
+/* global noUiSlider:readonly */
+import {
+  showAlert,
+  showPass
+} from './util.js';
 
 const uploadFile = document.querySelector('#upload-file');
 const uploadFileCancel = document.querySelector('.img-upload__cancel');
@@ -26,7 +29,6 @@ const effectMarvin = effectList.querySelector('.effects__item #effect-marvin');
 const effectPhobos = effectList.querySelector('.effects__item #effect-phobos');
 const effectHeat = effectList.querySelector('.effects__item #effect-heat');
 
-
 uploadFileCancel.addEventListener('click', function () {
   uploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
@@ -45,11 +47,6 @@ uploadFile.addEventListener('change', function () {
 
 });
 
-
-
-
-
-/* global noUiSlider:readonly */
 noUiSlider.create(sliderElement, {
   range: {
     min: 0,
@@ -137,7 +134,6 @@ effectHeat.addEventListener('change', (evt) => {
 });
 
 effectNone.addEventListener('click', function () {
-
   sliderElement.noUiSlider.on('update', () => {
     imgUploadPreviw.style.filter = 'none';
 
@@ -145,10 +141,8 @@ effectNone.addEventListener('click', function () {
 
   imgUploadPreviw.classList.remove('effects__preview--heat', 'effects__preview--chrome', 'effects__preview--sepia',
     'effects__preview--marvin', 'effects__preview--phobos');
-
   imgUploadPreviw.classList.add('effects__preview--none');
 });
-
 
 effectSepia.addEventListener('click', function () {
   imgUploadPreviw.style.filter = 'sepia(1)';
@@ -172,7 +166,6 @@ effectChrome.addEventListener('click', function () {
 
   imgUploadPreviw.classList.remove('effects__preview--heat', 'effects__preview--sepia', 'effects__preview--none',
     'effects__preview--marvin', 'effects__preview--phobos');
-
   imgUploadPreviw.classList.add('effects__preview--chrome');
 });
 
@@ -185,7 +178,6 @@ effectMarvin.addEventListener('click', function () {
 
   imgUploadPreviw.classList.remove('effects__preview--heat', 'effects__preview--sepia', 'effects__preview--none',
     'effects__preview--chrome', 'effects__preview--phobos');
-
   imgUploadPreviw.classList.add('effects__preview--marvin');
 });
 
@@ -198,33 +190,27 @@ effectPhobos.addEventListener('click', function () {
 
   imgUploadPreviw.classList.remove('effects__preview--heat', 'effects__preview--sepia', 'effects__preview--none',
     'effects__preview--chrome', 'effects__preview--marvin');
-
   imgUploadPreviw.classList.add('effects__preview--phobos');
 });
 
 effectHeat.addEventListener('click', function () {
   imgUploadPreviw.style.filter = 'brightness(20)';
-
   sliderElement.noUiSlider.on('update', (values, handle) => {
     imgUploadPreviw.style.filter = `brightness(${values[handle]})`;
   });
 
   imgUploadPreviw.classList.remove('effects__preview--phobos', 'effects__preview--sepia', 'effects__preview--none',
     'effects__preview--chrome', 'effects__preview--marvin');
-
   imgUploadPreviw.classList.add('effects__preview--heat');
 });
-
 
 let counter = 100;
 scaleValue.value = counter + '%';
 
 upScale.addEventListener('click', function () {
   if (counter <= 99) {
-
     counter += 25;
     scaleValue.value = counter + '%';
-
     imgUploadPreviw.style.transform = `scale(0.${counter})`;
     if (counter === 100) {
       imgUploadPreviw.style.transform = 'scale(1)';
@@ -245,7 +231,6 @@ downScale.addEventListener('click', function () {
 const validatehashtag = (str) => !IS_VALID_HASHTAG_REGEXP.test(str);
 
 const validatehashtags = (str) => {
-
   if (str.length === 0) {
     return false;
   }
@@ -272,7 +257,6 @@ const handlehashtagsChange = (evt) => {
   const element = evt.target;
   const value = element.value;
   const error = validatehashtags(value);
-
   element.setCustomValidity(error || '');
   element.reportValidity();
 }
@@ -283,7 +267,6 @@ const validateCommentText = (str) => {
   if (str.length === 0) {
     return false;
   }
-
   if (str.length > COMMENT_AUTOR_LENGTH_MAX) {
     return `Длина строки не должна превышать ${COMMENT_AUTOR_LENGTH_MAX} символов`;
   }
@@ -316,7 +299,9 @@ const setUserFormSubmit = (onSuccess) => {
     )
       .then((response) => {
         if (response.ok) {
-          onSuccess(); formSubmit.reset(); showPass('Форма отправлена');
+          onSuccess();
+          formSubmit.reset();
+          showPass('Форма отправлена');
 
         } else {
           showAlert('Не удалось отправить форму. Попробуйте ещё раз');

@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Юрий Комендантский](https://up.htmlacademy.ru/javascript/22/user/1517803).
-* Наставник: [Андрей Карякин](https://htmlacademy.ru/profile/id133011).
+* Наставник: [Олег Зубов](https://htmlacademy.ru/profile/id42701).
 
 ---
 

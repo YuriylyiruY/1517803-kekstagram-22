@@ -20,20 +20,15 @@ const getComment = (data) => {
   img.setAttribute('src', data.avatar);
   img.setAttribute('alt', data.name);
   text.textContent = data.message;
-
   return element;
 }
 
 const getComments = (comments) => {
   const fragment = document.createDocumentFragment();
-
   comments.forEach(comment => {
     fragment.appendChild(getComment(comment));
-
   });
-
   return fragment;
-
 }
 
 const fillBigPic = (data) => {
@@ -43,7 +38,6 @@ const fillBigPic = (data) => {
   popupSocialCaption.textContent = data.description;
   popupCommentsCount.textContent = data.comments.length;
   popupSocialComments.textContent = '';
-
   let MAX_QUANTITY_COMMENTS = 5;
   let MIN_QUANTITY_COMMENTS = 0;
   popupSocialComments.appendChild(getComments(data.comments.slice(MIN_QUANTITY_COMMENTS, MAX_QUANTITY_COMMENTS)));
@@ -105,11 +99,10 @@ const getObjectDataPic = pictures => (evt) => {
     const element = evt.target;
     const id = element.getAttribute('data-id'); // получили id картинки
     const photo = pictures.find(picture => picture.id === Number(id)); // получили объект данных картинки
-
     openPopup(photo);
   }
-
 }
+
 export {
   getObjectDataPic
 
