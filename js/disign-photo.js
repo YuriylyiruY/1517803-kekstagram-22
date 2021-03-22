@@ -343,7 +343,7 @@ const closePopupAfterSubmit = () => {
   body.classList.remove('modal-open');
 }
 
-const setUserFormSubmit = (onSuccess) => {
+const setUserFormSubmit = (onClose) => {
   formSubmit.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const formData = new FormData(evt.target);
@@ -355,13 +355,13 @@ const setUserFormSubmit = (onSuccess) => {
     )
       .then((response) => {
         if (response.ok) {
-          onSuccess();
+          onClose();
           formSubmit.reset();
           getPass();
 
 
         } else {
-          onSuccess();
+          onClose();
           formSubmit.reset();
           getWarning();
         }
