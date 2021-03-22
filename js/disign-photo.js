@@ -1,7 +1,6 @@
 /* global noUiSlider:readonly */
 import {
   getPass,
-
   getWarning
 
 } from './util.js';
@@ -349,7 +348,7 @@ const setUserFormSubmit = (onSuccess) => {
     evt.preventDefault();
     const formData = new FormData(evt.target);
     fetch(
-      'https://22.javascript.pages.academy/kekstagram', {
+      'https://22.javascript.pages.academy/kekstagra', {
         method: 'POST',
         body: formData,
       },
@@ -362,6 +361,8 @@ const setUserFormSubmit = (onSuccess) => {
 
 
         } else {
+          onSuccess();
+          formSubmit.reset();
           getWarning();
         }
       })
