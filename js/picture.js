@@ -9,12 +9,6 @@ const imgFiltersButtonDiscussed = document.querySelector('.img-filters__button#f
 const pictureNode = document.querySelector('.pictures');
 const templateFragment = document.querySelector('#picture'); // Находим фрагмент с содержимым темплейта
 
-/**
- * заполняется разметка маленькой картинки
- * @param {*} data - объект, со вложенными коментами
- * @returns фрагмент .picture с значениями
- */
-
 const renderPicture = (data) => {
   const element = templateFragment.content.cloneNode(true); // Клонируем элемент со всеми "внутренностями"
   const img = element.querySelector('.picture__img');
@@ -43,7 +37,7 @@ const removeChildren = (parent, selector) => {
 
 /** Удаляет прежнее содержание, картинки, лайки, коменты с помощью removeChildren
  *  Коробочку вставляет в DOM более точно в .pictures
- * Срабатывает при клике по картинке, где передает данные  (аналог data, DATA из майн ) по месту вызова
+ * Срабатывает при клике по картинке, где передет данные  (аналог data, DATA из майн ) по месту вызова
  *
  * @param {*} pictures массив объектов (аналог data, DATA из майн )
  */
@@ -60,11 +54,13 @@ imgFiltersButtonRandom.addEventListener('click', function () {
   imgFiltersButtonDefault.classList.remove('img-filters__button--active');
   imgFiltersButtonRandom.classList.add('img-filters__button--active');
 });
+
 imgFiltersButtonDefault.addEventListener('click', function () {
   imgFiltersButtonDiscussed.classList.remove('img-filters__button--active');
   imgFiltersButtonRandom.classList.remove('img-filters__button--active');
   imgFiltersButtonDefault.classList.add('img-filters__button--active');
 });
+
 imgFiltersButtonDiscussed.addEventListener('click', function () {
   imgFiltersButtonDefault.classList.remove('img-filters__button--active');
   imgFiltersButtonRandom.classList.remove('img-filters__button--active');
