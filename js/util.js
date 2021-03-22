@@ -1,54 +1,70 @@
-const START_NUM_ID = 15;
-const END_NUM_ID = 200;
-const START_NUM_AVATAR = 1;
-const END_NUM_AVATAR = 6;
-const MESSAGE = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'В целом всё неплохо. Но не всё.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
-];
+const main = document.querySelector('main');
+const templateError = document.querySelector('#error').content;
+const templateSuccess = document.querySelector('#success').content;
+const fragment = document.createDocumentFragment();
+const successTemplate = templateSuccess.querySelector('.success');
+const elementSuccess = successTemplate.cloneNode(true);
+const succesInner = elementSuccess.querySelector('.success__inner');
+const successTitle = succesInner.querySelector('.success__title');
+const successButton = succesInner.querySelector('.success__button');
+const fragmentError = document.createDocumentFragment();
+const errorTemplate = templateError.querySelector('.error');
+const elementError = errorTemplate.cloneNode(true);
+const errorInner = elementError.querySelector('.error__inner');
+const errorTitle = errorInner.querySelector('.error__title');
+const errorButton = errorInner.querySelector('.error__button');
 
+successButton.addEventListener('click', function () {
+  elementSuccess.remove();
+});
 
-const getRandomBetween = function (fromNum, toNum) {
-
-  if (isNaN(toNum) || isNaN(fromNum) || Array.isArray(toNum) || Array.isArray(fromNum) || fromNum < 0 || toNum < 0) {
-    throw new Error('Передано неверное значение.');
+document.addEventListener('click', function (evt) {
+  if (evt.target.classList.contains('success__inner') || evt.target.classList.contains('success__title')) {
+    evt.preventDefault();
+  } else {
+    elementSuccess.remove();
   }
+});
 
-  let max = fromNum;
-  let min = toNum;
-  if (fromNum > toNum) {
-    [min, max] = [max, min];
+document.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Escape' || evt.key === 'Esc') {
+    elementSuccess.remove();
   }
-  return Math.floor((Math.random() * (max + 1 - min) + min));
-}
-export {
-  getRandomBetween
-};
-//task 2
-const checkStringLength = function (STR, MAXLENGTH) {
-  return (STR.length <= MAXLENGTH);
-}
-export {
-  checkStringLength
-};
+});
 
-const getMessageText = () => {
+const getPass = () => {
+  successTitle.textContent = 'Hello World!';
+  successButton.textContent = 'Its Ok!';
+  fragment.appendChild(elementSuccess);
+  main.appendChild(fragment);
+}
 
-  const randArray = getRandomBetween(0, MESSAGE.length - 1);
-  return (MESSAGE[randArray]);
-};
-export {
-  getMessageText
-};
-const getOurComments = (i) => {
-  return {
-    id: getRandomBetween(START_NUM_ID, END_NUM_ID),
-    avatar: `img/avatar-${getRandomBetween(START_NUM_AVATAR, END_NUM_AVATAR)}.jpg`,
-    message: getMessageText(),
-    name: `user${i}`,
+const getWarning = () => {
+  errorTitle.textContent = 'Hello World!';
+  errorButton.textContent = 'Its Not Ok!';
+  fragmentError.appendChild(elementError);
+  main.appendChild(fragmentError);
+}
+
+errorButton.addEventListener('click', function () {
+  elementError.remove();
+});
+
+document.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Escape' || evt.key === 'Esc') {
+    elementError.remove();
   }
-}
+});
+
+document.addEventListener('click', function (evt) {
+  if (evt.target.classList.contains('error__inner') || evt.target.classList.contains('error__title')) {
+    evt.preventDefault();
+  } else {
+    elementError.remove();
+  }
+});
+
 export {
-  getOurComments
+  getWarning,
+  getPass
 };
