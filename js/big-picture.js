@@ -11,10 +11,10 @@ const commentLoader = document.querySelector('.social__comments-loader');
 const socialCommentCount = document.querySelector('.social__comment-count');
 const body = document.querySelector('body');
 const popapCancel = document.querySelector('.big-picture__cancel');
-const TemplateForOneComment = document.querySelector('#social__comment').content;
+const templateForOneComment = document.querySelector('#social__comment').content;
 
 const getComment = (data) => {
-  const element = TemplateForOneComment.querySelector('.social__comment').cloneNode(true);
+  const element = templateForOneComment.querySelector('.social__comment').cloneNode(true);
   const img = element.querySelector('.social__picture');
   const text = element.querySelector('.social__text');
   img.setAttribute('src', data.avatar);
@@ -32,22 +32,20 @@ const getComments = (comments) => {
 }
 
 const fillBigPic = (data) => {
+  let maxQuantityComments = 5;
+  let minQuantityComments = 0;
   popupImg.setAttribute('src', data.url);
   popupImg.setAttribute('alt', data.description);
   popupSocialLikes.textContent = data.likes;
   popupSocialCaption.textContent = data.description;
   popupCommentsCount.textContent = data.comments.length;
   popupSocialComments.textContent = '';
-  let MAX_QUANTITY_COMMENTS = 5;
-  let MIN_QUANTITY_COMMENTS = 0;
-  popupSocialComments.appendChild(getComments(data.comments.slice(MIN_QUANTITY_COMMENTS, MAX_QUANTITY_COMMENTS)));
-
+  popupSocialComments.appendChild(getComments(data.comments.slice(minQuantityComments, maxQuantityComments)));
   commentLoader.onclick = () => {
     popupSocialComments.textContent = '';
-    MAX_QUANTITY_COMMENTS += 5;
-    MIN_QUANTITY_COMMENTS += 5;
-    popupSocialComments.appendChild(getComments(data.comments.slice(MIN_QUANTITY_COMMENTS, MAX_QUANTITY_COMMENTS)));
-    if (MIN_QUANTITY_COMMENTS > data.comments.length) {
+    maxQuantityComments += 5;
+    popupSocialComments.appendChild(getComments(data.comments.slice(minQuantityComments, maxQuantityComments)));
+    if (maxQuantityComments > data.comments.length) {
       commentLoader.classList.add('hidden');
     }
   }
@@ -105,5 +103,4 @@ const getObjectDataPic = pictures => (evt) => {
 
 export {
   getObjectDataPic
-
 };

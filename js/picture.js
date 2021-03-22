@@ -3,6 +3,9 @@ import {
 
 } from './big-picture.js';
 
+const imgFiltersButtonDefault = document.querySelector('.img-filters__button#filter-default');
+const imgFiltersButtonRandom = document.querySelector('.img-filters__button#filter-random');
+const imgFiltersButtonDiscussed = document.querySelector('.img-filters__button#filter-discussed');
 const pictureNode = document.querySelector('.pictures');
 const templateFragment = document.querySelector('#picture'); // Находим фрагмент с содержимым темплейта
 
@@ -51,6 +54,22 @@ const placePictures = (pictures) => {
   const ObjectDataPicture = getObjectDataPic(pictures);
   pictureNode.addEventListener('click', ObjectDataPicture);
 }
+
+imgFiltersButtonRandom.addEventListener('click', function () {
+  imgFiltersButtonDiscussed.classList.remove('img-filters__button--active');
+  imgFiltersButtonDefault.classList.remove('img-filters__button--active');
+  imgFiltersButtonRandom.classList.add('img-filters__button--active');
+});
+imgFiltersButtonDefault.addEventListener('click', function () {
+  imgFiltersButtonDiscussed.classList.remove('img-filters__button--active');
+  imgFiltersButtonRandom.classList.remove('img-filters__button--active');
+  imgFiltersButtonDefault.classList.add('img-filters__button--active');
+});
+imgFiltersButtonDiscussed.addEventListener('click', function () {
+  imgFiltersButtonDefault.classList.remove('img-filters__button--active');
+  imgFiltersButtonRandom.classList.remove('img-filters__button--active');
+  imgFiltersButtonDiscussed.classList.add('img-filters__button--active');
+});
 
 export {
   renderPictures,
