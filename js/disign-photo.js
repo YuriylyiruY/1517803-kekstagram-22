@@ -41,27 +41,26 @@ uploadFileCancel.addEventListener('click', function () {
 
 const closeModalWindow = function (evt) {
   if (evt.key === ('Escape' || 'Esc')) {
-
     uploadOverlay.classList.add('hidden');
     body.classList.remove('modal-open');
   }
 };
 
 hashtag.addEventListener('focus', () => {
-  body.removeEventListener('keydown',closeModalWindow,false);
+  body.removeEventListener('keydown', closeModalWindow, false);
 
 }, true);
 hashtag.addEventListener('blur', () => {
-  body.addEventListener('keydown',closeModalWindow,false);
+  body.addEventListener('keydown', closeModalWindow, false);
 
 }, true);
 
 textComentAutor.addEventListener('focus', () => {
-  body.removeEventListener('keydown',closeModalWindow,false);
+  body.removeEventListener('keydown', closeModalWindow, false);
 
 }, true);
 textComentAutor.addEventListener('blur', () => {
-  body.addEventListener('keydown',closeModalWindow,false);
+  body.addEventListener('keydown', closeModalWindow, false);
 
 }, true);
 
@@ -160,11 +159,12 @@ effectHeat.addEventListener('change', (evt) => {
 });
 
 imgUploadLabel.addEventListener('click', function () {
-  scaleValue.value = 100 + '%';
+  counter = 100;
+  scaleValue.value = counter + '%';
   imgUploadPreviw.style.transform = 'scale(1)';
   sliderElement.noUiSlider.on('update', () => {
     imgUploadPreviw.style.filter = 'none';
-    effectSlider.classList.add('hidden');
+    imgUploadEffectLevel.classList.add('hidden');
   });
   imgUploadPreviw.classList.remove('effects__preview--heat', 'effects__preview--chrome', 'effects__preview--sepia',
     'effects__preview--marvin', 'effects__preview--phobos');
@@ -172,19 +172,20 @@ imgUploadLabel.addEventListener('click', function () {
 });
 
 imgUploadLabel.addEventListener('click', function () {
-
-  scaleValue.value = 100 + '%';
+  counter = 100;
+  scaleValue.value = counter + '%';
   imgUploadPreviw.style.transform = 'scale(1)';
   sliderElement.noUiSlider.set(100);
-
 });
 
 effectNone.addEventListener('click', function () {
-  scaleValue.value = 100 + '%';
+  counter = 100;
+  scaleValue.value = counter + '%';
   imgUploadPreviw.style.transform = 'scale(1)';
   sliderElement.noUiSlider.on('update', () => {
     imgUploadPreviw.style.filter = 'none';
-    effectSlider.classList.add('hidden');
+    imgUploadEffectLevel.classList.add('hidden');
+
   });
   imgUploadPreviw.classList.remove('effects__preview--heat', 'effects__preview--chrome', 'effects__preview--sepia',
     'effects__preview--marvin', 'effects__preview--phobos');
@@ -192,13 +193,14 @@ effectNone.addEventListener('click', function () {
 });
 
 effectSepia.addEventListener('click', function () {
-  scaleValue.value = 100 + '%';
+  counter = 100;
+  scaleValue.value = counter + '%';
   imgUploadPreviw.style.transform = 'scale(1)';
   sliderElement.noUiSlider.on('update', (values, handle) => {
     imgUploadPreviw.style.filter = 'sepia(1)';
     imgUploadPreviw.style.filter = `sepia(${values[handle]})`;
+    imgUploadEffectLevel.classList.remove('hidden');
     effectSlider.classList.remove('hidden');
-
   });
   imgUploadPreviw.classList.remove('effects__preview--heat', 'effects__preview--chrome', 'effects__preview--none',
     'effects__preview--marvin', 'effects__preview--phobos');
@@ -207,13 +209,14 @@ effectSepia.addEventListener('click', function () {
 });
 
 effectChrome.addEventListener('click', function () {
-  scaleValue.value = 100 + '%';
+  counter = 100;
+  scaleValue.value = counter + '%';
   imgUploadPreviw.style.transform = 'scale(1)';
   sliderElement.noUiSlider.on('update', (values, handle) => {
     imgUploadPreviw.style.filter = 'grayscale(1)';
     imgUploadPreviw.style.filter = `grayscale(${values[handle]})`;
+    imgUploadEffectLevel.classList.remove('hidden');
     effectSlider.classList.remove('hidden');
-
   });
   imgUploadPreviw.classList.remove('effects__preview--heat', 'effects__preview--sepia', 'effects__preview--none',
     'effects__preview--marvin', 'effects__preview--phobos');
@@ -221,13 +224,14 @@ effectChrome.addEventListener('click', function () {
 });
 
 effectMarvin.addEventListener('click', function () {
-  scaleValue.value = 100 + '%';
+  counter = 100;
+  scaleValue.value = counter + '%';
   imgUploadPreviw.style.transform = 'scale(1)';
   sliderElement.noUiSlider.on('update', (values, handle) => {
     imgUploadPreviw.style.filter = 'invert(100%)';
     imgUploadPreviw.style.filter = `invert(${values[handle]}%)`;
+    imgUploadEffectLevel.classList.remove('hidden');
     effectSlider.classList.remove('hidden');
-
   });
   imgUploadPreviw.classList.remove('effects__preview--heat', 'effects__preview--sepia', 'effects__preview--none',
     'effects__preview--chrome', 'effects__preview--phobos');
@@ -235,13 +239,14 @@ effectMarvin.addEventListener('click', function () {
 });
 
 effectPhobos.addEventListener('click', function () {
-  scaleValue.value = 100 + '%';
+  counter = 100;
+  scaleValue.value = counter + '%';
   imgUploadPreviw.style.transform = 'scale(1)';
   sliderElement.noUiSlider.on('update', (values, handle) => {
     imgUploadPreviw.style.filter = 'blur(20px)';
     imgUploadPreviw.style.filter = `blur(${values[handle]}px)`;
+    imgUploadEffectLevel.classList.remove('hidden');
     effectSlider.classList.remove('hidden');
-
   });
   imgUploadPreviw.classList.remove('effects__preview--heat', 'effects__preview--sepia', 'effects__preview--none',
     'effects__preview--chrome', 'effects__preview--marvin');
@@ -249,13 +254,14 @@ effectPhobos.addEventListener('click', function () {
 });
 
 effectHeat.addEventListener('click', function () {
-  scaleValue.value = 100 + '%';
+  counter = 100;
+  scaleValue.value = counter + '%';
   imgUploadPreviw.style.transform = 'scale(1)';
   sliderElement.noUiSlider.on('update', (values, handle) => {
     imgUploadPreviw.style.filter = 'brightness(20)';
     imgUploadPreviw.style.filter = `brightness(${values[handle]})`;
+    imgUploadEffectLevel.classList.remove('hidden');
     effectSlider.classList.remove('hidden');
-
   });
   imgUploadPreviw.classList.remove('effects__preview--phobos', 'effects__preview--sepia', 'effects__preview--none',
     'effects__preview--chrome', 'effects__preview--marvin');

@@ -66,6 +66,12 @@ const closeHandler = () => {
   socialCommentCount.classList.remove('hidden');
 }
 
+const closePopupAfterEsc = function (evt) {
+  if (evt.key === ('Escape' || 'Esc')) {
+    popup.classList.add('hidden');
+    body.classList.remove('modal-open');
+  }
+};
 /**
  * Получает объект данных картинки и вызывает функцию заполнения его данными.
  * Показывает попап большой картинки, добавляю обработчик закрытия.
@@ -76,6 +82,7 @@ const openPopup = (data) => {
   fillBigPic(data); //добавили содержание в том числе коменты к большой картинке.
   popup.classList.remove('hidden');
   popapCancel.addEventListener('click', closeHandler);
+  body.addEventListener('keydown', closePopupAfterEsc);
   body.classList.add('modal-open');
   addComments(data);
   socialCommentCount.classList.add('hidden');
